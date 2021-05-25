@@ -1,40 +1,50 @@
-import e = require("express");
 import CategoryModel from "./model";
+import * as mysql2 from 'mysql2/promise';
 
 class CategoryService {
+    private db: mysql2.Connection;
+
+    constructor(db: mysql2.Connection) {
+        this.db = db;
+    }
+
+    protected async adaptModel(row: any): Promise<CategoryModel> {
+        const item: CategoryModel = new CategoryModel();
+
+        item.categoryId = +(row?.category_id);
+        item.name = row?.name;
+
+        return item;
+    }
+
     public async getAll(): Promise<CategoryModel[]> {
         const lista: CategoryModel[] = [];
 
-        lista.push({
-            categoryId: 1,
-            name: "Kategorija 1",
-        });
+        const sql: string = "SELECT * FROM category;";
+        const [rows, columns] = await this.db.execute(sql);
 
-        lista.push({
-            categoryId: 2,
-            name: "Kategorija 2",
-        });
+        if (Array.isArray(rows)) {
+            for (const row of rows) {
+                lista.push(await this.adaptModel(row));
+            }
+        }
 
         return lista;
     }
 
     public async getById(categoryId: number): Promise<CategoryModel|null> {
-        if (categoryId === 1 || categoryId === 2) {
-            if (categoryId === 1) {
-                return {
-                    categoryId: 1,
-                    name: "Kategorija 1",
-                };
-            }
-            if (categoryId === 2) {
-                return {
-                    categoryId: 2,
-                    name: "Kategorija 2",
-                };
-            }
-        } else {
+        const sql: string = "SELECT * FROM category WHERE category_id = ?;";
+        const [rows, columns] = await this.db.execute(sql, [categoryId]);
+        
+        if (!Array.isArray(rows)) {
             return null;
         }
+
+        if (rows.length === 0) {
+            return null;
+        }
+
+        return await this.adaptModel(rows[0]);
     }
 }
 
