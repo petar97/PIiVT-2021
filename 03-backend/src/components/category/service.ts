@@ -1,3 +1,4 @@
+import e = require("express");
 import CategoryModel from "./model";
 
 class CategoryService {
@@ -15,6 +16,25 @@ class CategoryService {
         });
 
         return lista;
+    }
+
+    public async getById(categoryId: number): Promise<CategoryModel|null> {
+        if (categoryId === 1 || categoryId === 2) {
+            if (categoryId === 1) {
+                return {
+                    categoryId: 1,
+                    name: "Kategorija 1",
+                };
+            }
+            if (categoryId === 2) {
+                return {
+                    categoryId: 2,
+                    name: "Kategorija 2",
+                };
+            }
+        } else {
+            return null;
+        }
     }
 }
 
