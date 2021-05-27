@@ -1,10 +1,11 @@
-import express = require("express");
+import * as express from 'express';
 import CategoryService from './service';
 import CategoryController from './controller';
 import IApplicationResources from '../../common/IApplicationResources.interface';
+import IRouter from '../../common/IRouter.interface';
 
-export default class CategoryRouter {
-    public static setupRoutes(application: express.Application, resources: IApplicationResources) {
+export default class CategoryRouter implements IRouter{
+    public setupRoutes(application: express.Application, resources: IApplicationResources) {
         const categoryService: CategoryService = new CategoryService(resources.dbConnection);
         const categoryController: CategoryController = new CategoryController(categoryService);
 
