@@ -2,6 +2,7 @@ import CategoryModel from "./model";
 import * as mysql2 from 'mysql2/promise';
 import { resolve } from "path";
 import IErrorResponse from '../../common/IErrorResponse.interface';
+import { IAddCategory } from "./dto/AddCategory";
 
 class CategoryService {
     private db: mysql2.Connection;
@@ -49,7 +50,7 @@ class CategoryService {
             const sql: string = "SELECT * FROM category WHERE category_id = ?;";
             this.db.execute(sql, [categoryId])
                 .then(async result => {
-                    const [rows, columns] = result;
+                    const rows = result[0];
 
                     if (!Array.isArray(rows)) {
                         resolve(null);
@@ -62,6 +63,25 @@ class CategoryService {
                     }
         
                     resolve(await this.adaptModel(rows[0]));
+                })
+                .catch(error => {
+                    resolve({
+                        errorCode: error?.errno,
+                        errorMessage: error?.sqlMessage
+                    });
+                });
+        });
+    }
+
+    public async add(data: IAddCategory): Promise<CategoryModel|IErrorResponse> {
+        return new Promise<CategoryModel|IErrorResponse>(async resolve => {
+            const sql = `INSERT category SET name = ?;`;
+            this.db.execute(sql, [data.name])
+                .then(async result => {
+                    const insertInfo: any = result[0];
+
+                    const newCategoryId: number = +(insertInfo?.insertId);
+                    resolve(await this.getById(newCategoryId));
                 })
                 .catch(error => {
                     resolve({
