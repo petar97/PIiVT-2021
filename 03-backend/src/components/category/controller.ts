@@ -81,6 +81,19 @@ class CategoryController {
 
         res.send(result);
     }
+
+    async deleteById(req: Request, res: Response, next: NextFunction) {
+        const id: string = req.params.id;
+
+        const categoryId: number = +id;
+
+        if (categoryId < 1) {
+            res.sendStatus(400);
+            return;
+        }
+
+        res.send(await this.categoryService.delete(categoryId));
+    }
 }
 
 export default CategoryController;
