@@ -1,19 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 import CategoryModel from './model';
-import CategoryService from './service';
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import { IAddCategory, IAddCategoryValidator } from './dto/AddCategory';
 import { IEditCategory, IEditCategoryValidator } from './dto/EditCategory';
+import BaseController from '../../common/BaseController';
 
-class CategoryController {
-    private categoryService: CategoryService;
-
-    constructor(categoryService: CategoryService) {
-        this.categoryService = categoryService;
-    }
-
+class CategoryController extends BaseController {
     async getAll(req: Request, res: Response, next: NextFunction) {
-        const categories = await this.categoryService.getAll();
+        const categories = await this.services.categoryService.getAll();
 
         res.send(categories);
     }
@@ -28,7 +22,13 @@ class CategoryController {
             return;
         }
 
-        const data: CategoryModel|IErrorResponse|null = await this.categoryService.getById(categoryId);
+        const data: CategoryModel|IErrorResponse|null = await this.services.categoryService.getById(
+            categoryId,
+            {
+                loadFeatures: true,
+            }    
+        );
+        
         if (data === null) {
             res.sendStatus(404);
             return;
@@ -50,7 +50,7 @@ class CategoryController {
             return;
         }
 
-        const result = await this.categoryService.add(data as IAddCategory);
+        const result = await this.services.categoryService.add(data as IAddCategory);
         
         res.send(result);
     }
@@ -72,7 +72,7 @@ class CategoryController {
             return;
         }
 
-        const result = await this.categoryService.edit(categoryId, data as IEditCategory);
+        const result = await this.services.categoryService.edit(categoryId, data as IEditCategory);
 
         if (result === null) {
             res.sendStatus(404);
@@ -92,7 +92,7 @@ class CategoryController {
             return;
         }
 
-        res.send(await this.categoryService.delete(categoryId));
+        res.send(await this.services.categoryService.delete(categoryId));
     }
 }
 

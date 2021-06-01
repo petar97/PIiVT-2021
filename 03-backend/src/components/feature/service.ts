@@ -1,8 +1,6 @@
 import IModelAdapterOptions from "../../common/IModelAdapterOptions.interface";
-import BaseService from "../../services/BaseService";
+import BaseService from "../../common/BaseService";
 import FeatureModel from './model';
-import * as mysql2 from 'mysql2/promise';
-import CategoryService from '../category/service';
 import CategoryModel from '../category/model';
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import { IAddFeature } from "./dto/AddFeature";
@@ -13,13 +11,7 @@ class FeatureModelAdapterOptions implements IModelAdapterOptions {
 }
 
 class FeatureService extends BaseService<FeatureModel> {
-    private categoryService: CategoryService;
-
-    constructor(db: mysql2.Connection) {
-        super(db);
-
-        this.categoryService = new CategoryService(this.db);
-    }
+    
 
     protected async adaptModel(
         data: any,
@@ -32,7 +24,7 @@ class FeatureService extends BaseService<FeatureModel> {
         item.categoryId = +(data?.category_id);
 
         if (options.loadCategory && item.categoryId) {
-            const result = await this.categoryService.getById(item.categoryId);
+            const result = await this.services.categoryService.getById(item.categoryId);
 
             if (result instanceof CategoryModel) {
                 item.category = result;
