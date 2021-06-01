@@ -3,6 +3,7 @@ import IModelAdapterOptions from '../../common/IModelAdapterOptions.interface';
 import PhoneModel, { PhoneFeatureValue, PhonePhoto } from './model';
 import CategoryModel from '../category/model';
 import IErrorResponse from '../../common/IErrorResponse.interface';
+import { IAddPhone, IUploadedPhoto } from './dto/IAddPhone';
 
 class PhoneModelAdapterOptions implements IModelAdapterOptions {
     loadCategories: boolean = false;
@@ -123,6 +124,91 @@ class PhoneService extends BaseService<PhoneModel> {
             phoneId,
             options,
         );
+    }
+
+    public async add(
+        data: IAddPhone,
+        uploadedPhotos: IUploadedPhoto[],
+    ): Promise<PhoneModel|IErrorResponse> {
+        return new Promise<PhoneModel|IErrorResponse>(resolve => {
+            this.db.beginTransaction()
+            .then(() => {
+                this.db.execute(
+                    `
+                    INSERT phone
+                    SET
+                        title = ?,
+                        description = ?,
+                        price = ?;
+                    `,
+                    [
+                        data.title,
+                        data.description,
+                        data.price
+                    ]
+                ).then(async (res: any) => {
+                    const newPhoneId: number = +(res[0]?.insertId);
+
+                    const promises = [];
+
+                    promises.push(
+                        this.db.execute(
+                            `INSERT phone SET price = ?, phone_id = ?;`,
+                            [data.price, newPhoneId]
+                        )
+                    );
+
+                    for (const featureValue of data.features) {
+                        promises.push(
+                            this.db.execute(
+                                `INSERT phone_feature
+                                 SET phone_id = ?, feature_id = ?, value = ?;`,
+                                [ newPhoneId, featureValue.featureId, featureValue.value, ]
+                            ),
+                        );
+                    }
+
+                    for (const uploadedPhoto of uploadedPhotos) {
+                        promises.push(
+                            this.db.execute(
+                                `INSERT photo SET phone_id = ?, image_path = ?;`,
+                                [ newPhoneId, uploadedPhoto.imagePath, ]
+                            ),
+                        );
+                    }
+
+                    Promise.all(promises)
+                    .then(async () => {
+                        await this.db.commit();
+
+                        resolve(await this.services.phoneService.getById(
+                            newPhoneId,
+                            {
+                                loadCategories: true,
+                                loadFeatures: true,
+                                loadPhotos: true
+                            }
+                        ));
+                    })
+                    .catch(async error => {
+                        await this.db.rollback();
+    
+                        resolve({
+                            errorCode: error?.errno,
+                            errorMessage: error?.sqlMessage
+                        });
+                    });
+                })
+                .catch(async error => {
+                    await this.db.rollback();
+
+                    resolve({
+                        errorCode: error?.errno,
+                        errorMessage: error?.sqlMessage
+                    });
+                });
+            });
+        });
     }
 }
 

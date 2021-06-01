@@ -8,7 +8,7 @@ class Photo implements IModel {
 
 class FeatureValue implements IModel {
     featureId: number;
-    name: string;
+    name?: string;
     value: string;
 }
 

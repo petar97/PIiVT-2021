@@ -9,6 +9,10 @@ interface IAddPhone {
     features: PhoneFeatureValue[];
 }
 
+interface IUploadedPhoto {
+    imagePath: string;
+}
+
 const ajv = new Ajv();
 
 const IAddPhoneValidator = ajv.compile({
@@ -61,3 +65,4 @@ const IAddPhoneValidator = ajv.compile({
 
 export { IAddPhone };
 export { IAddPhoneValidator };
+export { IUploadedPhoto };

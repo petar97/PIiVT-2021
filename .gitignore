@@ -1,2 +1,5 @@
+temp/
+
 03-backend/node_modules/
 03-backend/dist/
+03-backend/static/uploads/

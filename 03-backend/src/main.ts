@@ -10,12 +10,26 @@ import CategoryService from './components/category/service';
 import FeatureService from './components/feature/service';
 import PhoneService from './components/phone/service';
 import PhoneRouter from './components/phone/router';
+import * as fileUpload from "express-fileupload";
 
 async function main() {
     const application: express.Application = express();
 
     application.use(cors());
     application.use(express.json());
+    application.use(fileUpload({
+        limits: {
+            fileSize: Config.fileUpload.maxSize,
+            files: Config.fileUpload.maxFiles,
+        },
+        useTempFiles: true,
+        tempFileDir: Config.fileUpload.temporaryDirectory,
+        uploadTimeout: Config.fileUpload.timeout,
+        safeFileNames: true,
+        preserveExtension: true,
+        createParentPath: true,
+        abortOnLimit: true,
+    }));
 
     const resources: IApplicationResources = {
         dbConnection: await mysql2.createConnection({
