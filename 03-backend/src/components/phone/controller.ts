@@ -5,6 +5,8 @@ import Config from '../../config/dev';
 import { v4 } from 'uuid';
 import { UploadedFile } from 'express-fileupload';
 import sizeOf from "image-size";
+import * as path from "path";
+import * as sharp from "sharp";
 
 class PhoneController extends BaseController {
     public async getById(req: Request, res: Response) {
@@ -77,6 +79,30 @@ class PhoneController extends BaseController {
         }
     }
 
+    private async resizeUploadedPhoto(imagePath: string) {
+        const pathParts = path.parse(imagePath);
+
+        const directory = pathParts.dir;
+        const filename  = pathParts.name;
+        const extension = pathParts.ext;
+
+        for (const resizeSpecification of Config.fileUpload.photos.resizes) {
+            const resizedImagePath = directory + "/" +
+                                     filename +
+                                     resizeSpecification.sufix +
+                                     extension;
+            await sharp(imagePath)
+                .resize({
+                    width: resizeSpecification.width,
+                    height: resizeSpecification.hieght,
+                    fit: resizeSpecification.fit,
+                    background: { r: 255, g: 255, b: 255, alpha: 1.0, },
+                    withoutEnlargement: true,
+                })
+                .toFile(resizedImagePath);
+        }
+    }
+
     private async uploadFiles(req: Request, res: Response): Promise<IUploadedPhoto[]> {
         if (!req.files || Object.keys(req.files).length === 0) {
             res.status(400).send("You must upload at lease one and a maximum of " + Config.fileUpload.maxFiles + " photos.");
@@ -107,6 +133,7 @@ class PhoneController extends BaseController {
                               randomString + "-" + originalName;
 
             await file.mv(imagePath);
+            await this.resizeUploadedPhoto(imagePath);
 
             uploadedPhotos.push({
                 imagePath: imagePath,
@@ -122,7 +149,7 @@ class PhoneController extends BaseController {
         if (uploadedPhotos.length === 0) {
             return;
         }
-        
+
         try {
             const data = JSON.parse(req.body?.data);
 
