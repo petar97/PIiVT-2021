@@ -133,6 +133,7 @@ class PhoneService extends BaseService<PhoneModel> {
         return new Promise<PhoneModel|IErrorResponse>(resolve => {
             this.db.beginTransaction()
             .then(() => {
+                console.log(data.title);
                 this.db.execute(
                     `
                     INSERT phone
@@ -142,21 +143,15 @@ class PhoneService extends BaseService<PhoneModel> {
                         price = ?;
                     `,
                     [
-                        data.title,
+                        data?.title,
                         data.description,
                         data.price
                     ]
                 ).then(async (res: any) => {
+                    console.log(res[0]);
                     const newPhoneId: number = +(res[0]?.insertId);
 
                     const promises = [];
-
-                    promises.push(
-                        this.db.execute(
-                            `INSERT phone SET price = ?, phone_id = ?;`,
-                            [data.price, newPhoneId]
-                        )
-                    );
 
                     for (const featureValue of data.features) {
                         promises.push(

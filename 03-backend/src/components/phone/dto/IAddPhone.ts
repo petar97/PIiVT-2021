@@ -5,7 +5,7 @@ interface IAddPhone {
     title: string;
     description: string;
     price: number;
-    categoryId: number;
+    categoryId?: number;
     features: PhoneFeatureValue[];
 }
 
@@ -50,7 +50,7 @@ const IAddPhoneValidator = ajv.compile({
                     },
                     value: {
                         type: "string",
-                        minLength: 2,
+                        minLength: 1,
                         maxLength: 64,
                     }
                 },
@@ -59,7 +59,7 @@ const IAddPhoneValidator = ajv.compile({
             },
         },
     },
-    required: [ "title", "description", "price", "categoryId", "features" ],
+    required: [ "title", "description", "price", "features" ],
     additionalProperties: false,
 });
 
