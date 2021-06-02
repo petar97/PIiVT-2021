@@ -8,5 +8,6 @@ export default class PhoneRouter implements IRouter {
         const phoneController = new PhoneController(resources);
         application.get('/phone/:id', phoneController.getById.bind(phoneController));
         application.post('/phone/',   phoneController.add.bind(phoneController));
+        application.put('/phone/:id',   phoneController.edit.bind(phoneController));
     }
 }

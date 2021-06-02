@@ -7,6 +7,7 @@ import { UploadedFile } from 'express-fileupload';
 import sizeOf from "image-size";
 import * as path from "path";
 import * as sharp from "sharp";
+import { IEditPhone, IEditPhoneValidator } from './dto/IEditPhone';
 
 class PhoneController extends BaseController {
     public async getById(req: Request, res: Response) {
@@ -165,6 +166,26 @@ class PhoneController extends BaseController {
             res.status(400).send(e?.message);
         }
         
+    }
+
+    public async edit(req: Request, res: Response) {
+        const id: number = +(req.params?.id);
+
+        if (id < 1) {
+            return res.sendStatus(400);
+        }
+
+        if (!IEditPhoneValidator(req.body)) {
+            return res.status(400).send(IEditPhoneValidator.errors);
+        }
+
+        const result = await this.services.phoneService.edit(id, req.body as IEditPhone);
+
+        if (result === null) {
+            return res.sendStatus(404);
+        }
+
+        res.send(result);
     }
 }
 

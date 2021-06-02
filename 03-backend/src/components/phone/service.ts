@@ -4,6 +4,7 @@ import PhoneModel, { PhoneFeatureValue, PhonePhoto } from './model';
 import CategoryModel from '../category/model';
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import { IAddPhone, IUploadedPhoto } from './dto/IAddPhone';
+import { IEditPhone } from './dto/IEditPhone';
 
 class PhoneModelAdapterOptions implements IModelAdapterOptions {
     loadCategories: boolean = false;
@@ -58,14 +59,12 @@ class PhoneService extends BaseService<PhoneModel> {
 
 
         for (const row of rows as any) {
-            console.log(row);
             items.push({
                 categoryId: +(row?.category_id),
                 name: row?.name,
             });
         }
 
-        console.log(items);
         return items;
     }
 
@@ -133,7 +132,6 @@ class PhoneService extends BaseService<PhoneModel> {
         return new Promise<PhoneModel|IErrorResponse>(resolve => {
             this.db.beginTransaction()
             .then(() => {
-                console.log(data.title);
                 this.db.execute(
                     `
                     INSERT phone
@@ -148,7 +146,6 @@ class PhoneService extends BaseService<PhoneModel> {
                         data.price
                     ]
                 ).then(async (res: any) => {
-                    console.log(res[0]);
                     const newPhoneId: number = +(res[0]?.insertId);
 
                     const promises = [];
@@ -203,6 +200,141 @@ class PhoneService extends BaseService<PhoneModel> {
                     });
                 });
             });
+        });
+    }
+
+    private editPhone(phoneId: number, data: IEditPhone) {
+        return this.db.execute(
+            `UPDATE
+                phone
+            SET
+                title = ?,
+                description = ?,
+                price = ?
+            WHERE
+                phone_id = ?;`,
+            [
+                data.title,
+                data.description,
+                data.price,
+                phoneId,
+            ]
+        );
+    }
+
+    private deletePhoneFeature(phoneId: number, featureId: number) {
+        return this.db.execute(
+            `DELETE FROM
+                phone_feature
+            WHERE
+                phone_id = ? AND
+                feature_id = ?;`,
+            [
+                phoneId,
+                featureId,
+            ]
+        );
+    }
+
+    private insertOrUpdateFeatureValue(phoneId: number, fv: PhoneFeatureValue) {
+        return this.db.execute(
+            `INSERT
+                phone_feature
+            SET
+                phone_id = ?,
+                feature_id = ?,
+                value = ?
+            ON DUPLICATE KEY
+            UPDATE
+                value = ?;`,
+            [
+                phoneId,
+                fv.featureId,
+                fv.value,
+                fv.value,
+            ],
+        );
+    }
+
+    public async edit(phoneId: number, data: IEditPhone): Promise<PhoneModel|null|IErrorResponse> {
+        return new Promise<PhoneModel|null|IErrorResponse>(async resolve => {
+            const currentPhone = await this.getById(phoneId, {
+                loadFeatures: true,
+            });
+
+            if (currentPhone === null) {
+                return resolve(null);
+            }
+
+            const rollbackAndResolve = async (error) => {
+                await this.db.rollback();
+                resolve({
+                    errorCode: error?.errno,
+                    errorMessage: error?.sqlMessage
+                });
+            }
+
+            this.db.beginTransaction()
+                .then(() => {
+                    this.editPhone(phoneId, data)
+                    .catch(error => {
+                        rollbackAndResolve({
+                            errno: error?.errno,
+                            sqlMessage: "Phone: " + error?.sqlMessage,
+                        });
+                    });
+                })
+                .then(async () => {
+                    const willHaveFeatures = data.features.map(fv => fv.featureId);
+                    const currentFeatures  = (currentPhone as PhoneModel).features.map(f => f.featureId);
+
+                    for (const currentFeature of currentFeatures) {
+                        if (!willHaveFeatures.includes(currentFeature)) {
+                            this.deletePhoneFeature(phoneId, currentFeature)
+                            .catch(error => {
+                                rollbackAndResolve({
+                                    errno: error?.errno,
+                                    sqlMessage: `Delete feature ID(${currentFeature}): ${error?.sqlMessage}`,
+                                });
+                            });
+                        }
+                    }
+                })
+                .then(async () => {
+                    for (const fv of data.features) {
+                        this.insertOrUpdateFeatureValue(phoneId, fv)
+                        .catch(error => {
+                            rollbackAndResolve({
+                                errno: error?.errno,
+                                sqlMessage: `Add/edit feature ID(${fv.featureId}): ${error?.sqlMessage}`,
+                            });
+                        });
+                    }
+                })
+                .then(async () => {
+                    this.db.commit()
+                    .catch(error => {
+                        rollbackAndResolve({
+                            errno: error?.errno,
+                            sqlMessage: `Save changes: ${error?.sqlMessage}`,
+                        });
+                    });
+                })
+                .then(async () => {
+                    resolve(await this.getById(phoneId, {
+                        loadCategories: true,
+                        loadFeatures: true,
+                        loadPhotos: true,
+                    }));
+                })
+                .catch(async error => {
+                    await this.db.rollback();
+
+                    resolve({
+                        errorCode: error?.errno,
+                        errorMessage: error?.sqlMessage
+                    });
+                });
         });
     }
 }
