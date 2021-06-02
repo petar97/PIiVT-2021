@@ -99,7 +99,7 @@ class PhoneController extends BaseController {
             const randomString = v4();
             const originalName = file?.name;
             const now = new Date();
-            
+
             const imagePath = Config.fileUpload.uploadDestinationDirectory +
                               (Config.fileUpload.uploadDestinationDirectory.endsWith("/") ? "" : "/") +
                               now.getFullYear() + "/" +
@@ -122,17 +122,22 @@ class PhoneController extends BaseController {
         if (uploadedPhotos.length === 0) {
             return;
         }
+        
+        try {
+            const data = JSON.parse(req.body?.data);
 
-        const data = JSON.parse(req.body?.data);
-
-        if (!IAddPhoneValidator(data)) {
-            res.status(400).send(IAddPhoneValidator.errors);
-            return;
+            if (!IAddPhoneValidator(data)) {
+                res.status(400).send(IAddPhoneValidator.errors);
+                return;
+            }
+    
+            const result = await this.services.phoneService.add(data as IAddPhone, uploadedPhotos);
+    
+            res.send(result);
+        } catch (e) {
+            res.status(400).send(e?.message);
         }
-
-        const result = await this.services.phoneService.add(data as IAddPhone, uploadedPhotos);
-
-        res.send(result);
+        
     }
 }
 
