@@ -5,6 +5,9 @@ import CategoryModel from '../category/model';
 import IErrorResponse from '../../common/IErrorResponse.interface';
 import { IAddPhone, IUploadedPhoto } from './dto/IAddPhone';
 import { IEditPhone } from './dto/IEditPhone';
+import * as fs from "fs";
+import Config from '../../config/dev';
+import * as path from 'path';
 
 class PhoneModelAdapterOptions implements IModelAdapterOptions {
     loadCategories: boolean = false;
@@ -336,6 +339,122 @@ class PhoneService extends BaseService<PhoneModel> {
                     });
                 });
         });
+    }
+
+    public async delete(phoneId: number): Promise<IErrorResponse|null> {
+        return new Promise<IErrorResponse>(async resolve => {
+            const currentPhone = await this.getById(phoneId, {
+                loadFeatures: true,
+                loadPhotos: true,
+            });
+
+            if (currentPhone === null) {
+                return resolve(null);
+            }
+
+            this.db.beginTransaction()
+                .then(async () => {
+                    if (await this.deletePhoneFeatureValues(phoneId)) return;
+                    throw { errno: -1003, sqlMessage: "Could not delete phone feature values.", };
+                })
+                .then(async () => {
+                    const filesToDelete = await this.deletePhonePhotoRecords(phoneId);
+                    
+                    if (filesToDelete.length !== 0) return filesToDelete;
+                    throw { errno: -1005, sqlMessage: "Could not delete phone photo records.", };
+                })
+                .then(async (filesToDelete) => {
+                    if (await this.deletePhoneRecord(phoneId)) return filesToDelete;
+                    throw { errno: -1006, sqlMessage: "Could not delete the phone records.", };
+                })
+                .then(async (filesToDelete) => {
+                    await this.db.commit();
+                    return filesToDelete;
+                })
+                .then((filesToDelete) => {
+                    this.deletePhonePhotosAndResizedVersion(filesToDelete);
+                })
+                .then(() => {
+                    resolve({
+                        errorCode: 0,
+                        errorMessage: "Phone deleted!",
+                    });
+                })
+                .catch(async error => {
+                    await this.db.rollback();
+                    resolve({
+                        errorCode: error?.errno,
+                        errorMessage: error?.sqlMessage
+                    });
+                });
+        });
+    }
+
+    private async deletePhoneFeatureValues(phoneId: number): Promise<boolean> {
+        return new Promise<boolean>(async resolve => {
+            this.db.execute(
+                `DELETE FROM phone_feature WHERE phone_id = ?;`,
+                [ phoneId ]
+            )
+            .then(() => resolve(true))
+            .catch(() => resolve(false));
+        });
+    }
+
+    private async deletePhonePhotoRecords(phoneId: number): Promise<string[]> {
+        return new Promise<string[]>(async resolve => {
+            const [ rows ] = await this.db.execute(
+                `SELECT image_path FROM photo WHERE phone_id = ?;`,
+                [ phoneId ]
+            );
+
+            if (!Array.isArray(rows) || rows.length === 0) return resolve([]);
+
+            const filesToDelete = rows.map(row => row?.image_path);
+
+            this.db.execute(
+                `DELETE FROM photo WHERE phone_id = ?;`,
+                [ phoneId ]
+            )
+            .then(() => resolve(filesToDelete))
+            .catch(() => resolve([]))
+
+            resolve(filesToDelete);
+        });
+    }
+
+    private async deletePhoneRecord(phoneId: number): Promise<boolean> {
+        return new Promise<boolean>(async resolve => {
+            this.db.execute(
+                `DELETE FROM phone WHERE phone_id = ?;`,
+                [ phoneId ]
+            )
+            .then(() => resolve(true))
+            .catch(() => resolve(false));
+        });
+    }
+
+    private deletePhonePhotosAndResizedVersion(filesToDelete: string[]) {
+        try {
+            for (const fileToDelete of filesToDelete) {
+                fs.unlinkSync(fileToDelete);
+
+                const pathParts = path.parse(fileToDelete);
+
+                const directory = pathParts.dir;
+                const filename  = pathParts.name;
+                const extension = pathParts.ext;
+
+                for (const resizeSpecification of Config.fileUpload.photos.resizes) {
+                    const resizedImagePath = directory + "/" +
+                                             filename +
+                                             resizeSpecification.sufix +
+                                             extension;
+
+                    fs.unlinkSync(resizedImagePath);
+                }
+            }
+        } catch (e) { }
     }
 }
 
