@@ -11,5 +11,6 @@ export default class PhoneRouter implements IRouter {
         application.put('/phone/:id',   phoneController.edit.bind(phoneController));
         application.delete('/phone/:id',   phoneController.delete.bind(phoneController));
         application.delete('/phone/:aid/photo/:pid',   phoneController.deletePhonePhoto.bind(phoneController));
+        application.post('/phone/:id/photo',   phoneController.addPhonePhotos.bind(phoneController));
     }
 }

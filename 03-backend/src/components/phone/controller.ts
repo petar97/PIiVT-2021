@@ -217,6 +217,24 @@ class PhoneController extends BaseController {
 
         res.send(result);
     }
+
+    public async addPhonePhotos(req: Request, res: Response) {
+        const phoneId: number = +(req.params?.id);
+
+        if (phoneId < 1) return res.sendStatus(400);
+
+        const item = await this.services.phoneService.getById(phoneId);
+
+        if (item === null) return res.sendStatus(404);
+
+        const uploadedPhotos = await this.uploadFiles(req, res);
+
+        if (uploadedPhotos.length === 0) {
+            return;
+        }
+
+        res.send(await this.services.phoneService.addPhonePhotos(phoneId, uploadedPhotos));
+    }
 }
 
 export default PhoneController;

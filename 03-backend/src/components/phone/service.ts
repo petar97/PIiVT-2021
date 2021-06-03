@@ -495,6 +495,65 @@ class PhoneService extends BaseService<PhoneModel> {
             }))
         });
     }
+
+    public async addPhonePhotos(
+        phoneId: number,
+        uploadedPhotos: IUploadedPhoto[]
+    ): Promise<PhoneModel|IErrorResponse|null> {
+        return new Promise<PhoneModel|IErrorResponse|null>(async resolve => {
+            const phone = await this.getById(phoneId, {
+                loadPhotos: true,
+            });
+
+            if (phone === null) {
+                return resolve(null);
+            }
+
+            this.db.beginTransaction()
+                .then(() => {
+                    const promises = [];
+
+                    for (const uploadedPhoto of uploadedPhotos) {
+                        promises.push(
+                            this.db.execute(
+                                `INSERT photo SET phone_id = ?, image_path = ?;`,
+                                [ phoneId, uploadedPhoto.imagePath, ]
+                            ),
+                        );
+                    }
+
+                    Promise.all(promises)
+                        .then(async () => {
+                            await this.db.commit();
+
+                            resolve(await this.services.phoneService.getById(
+                                phoneId,
+                                {
+                                    loadCategories: true,
+                                    loadFeatures: true,
+                                    loadPhotos: true,
+                                }
+                            ));
+                        })
+                        .catch(async error => {
+                            await this.db.rollback();
+
+                            resolve({
+                                errorCode: error?.errno,
+                                errorMessage: error?.sqlMessage
+                            });
+                        });
+                })
+                .catch(async error => {
+                    await this.db.rollback();
+
+                    resolve({
+                        errorCode: error?.errno,
+                        errorMessage: error?.sqlMessage
+                    });
+                })
+        })
+    }
 }
 
 export default PhoneService;
