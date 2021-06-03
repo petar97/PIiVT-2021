@@ -359,7 +359,7 @@ class PhoneService extends BaseService<PhoneModel> {
                 })
                 .then(async () => {
                     const filesToDelete = await this.deletePhonePhotoRecords(phoneId);
-                    
+
                     if (filesToDelete.length !== 0) return filesToDelete;
                     throw { errno: -1005, sqlMessage: "Could not delete phone photo records.", };
                 })
@@ -455,6 +455,45 @@ class PhoneService extends BaseService<PhoneModel> {
                 }
             }
         } catch (e) { }
+    }
+
+    public async deletePhonePhoto(phoneId: number, photoId: number): Promise<IErrorResponse|null> {
+        return new Promise<IErrorResponse|null>(async resolve => {
+            const phone = await this.getById(phoneId, {
+                loadPhotos: true,
+            });
+
+            if (phone === null) {
+                return resolve(null);
+            }
+
+            const filteredPhotos = (phone as PhoneModel).photos.filter(p => p.photoId === photoId);
+
+            if (filteredPhotos.length === 0) {
+                return resolve(null);
+            }
+
+            const photo = filteredPhotos[0];
+
+            this.db.execute(
+                `DELETE FROM photo WHERE photo_id = ?;`,
+                [ photo.photoId ]
+            )
+            .then(() => {
+                this.deletePhonePhotosAndResizedVersion([
+                    photo.imagePath
+                ]);
+
+                resolve({
+                    errorCode: 0,
+                    errorMessage: "Photo deleted.",
+                });
+            })
+            .catch(error => resolve({
+                errorCode: error?.errno,
+                errorMessage: error?.sqlMessage
+            }))
+        });
     }
 }
 

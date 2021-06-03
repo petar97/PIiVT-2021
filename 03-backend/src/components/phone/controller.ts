@@ -204,6 +204,19 @@ class PhoneController extends BaseController {
 
         res.send(await this.services.phoneService.delete(id));
     }
+
+    public async deletePhonePhoto(req: Request, res: Response) {
+        const phoneId: number = +(req.params?.aid);
+        const photoId: number   = +(req.params?.pid);
+
+        if (phoneId < 1 || photoId < 1) return res.sendStatus(400);
+
+        const result = await this.services.phoneService.deletePhonePhoto(phoneId, photoId);
+
+        if (result === null) return res.sendStatus(404);
+
+        res.send(result);
+    }
 }
 
 export default PhoneController;
