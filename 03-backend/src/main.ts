@@ -11,6 +11,8 @@ import FeatureService from './components/feature/service';
 import PhoneService from './components/phone/service';
 import PhoneRouter from './components/phone/router';
 import * as fileUpload from "express-fileupload";
+import AdministratorService from "./components/administrator/service";
+import AdministratorRouter from "./components/administrator/router";
 
 async function main() {
     const application: express.Application = express();
@@ -50,6 +52,7 @@ async function main() {
         categoryService: new CategoryService(resources),
         featureService: new FeatureService(resources),
         phoneService: new PhoneService(resources),
+        administratorService: new AdministratorService(resources),
     };
 
     application.use(
@@ -67,6 +70,7 @@ async function main() {
         new CategoryRouter(),
         new FeatureRouter(),
         new PhoneRouter(),
+        new AdministratorRouter(),
     ]);
 
     application.use((req, res) => {
