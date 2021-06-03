@@ -1,3 +1,4 @@
+import { readFileSync } from 'fs';
 import IConfig from '../common/IConfig.interface';
 
 const Config: IConfig = {
@@ -56,6 +57,22 @@ const Config: IConfig = {
                 },
             ],
         },
+    },
+    auth: {
+        administrator: {
+            algorithm: "RS256",
+            issuer: "localhost",
+            auth: {
+                duration: 60 * 60 * 24 * 7,
+                public: readFileSync("keystore/administrator-auth.public", "utf-8"),
+                private: readFileSync("keystore/administrator-auth.private", "utf-8"),
+            },
+            refresh: {
+                duration: 60 * 60 * 24 * 365,
+                public: readFileSync("keystore/administrator-refresh.public", "utf-8"),
+                private: readFileSync("keystore/administrator-refresh.private", "utf-8"),
+            },
+        }
     },
 };
 
