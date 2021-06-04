@@ -3,6 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 
 class BasePageProperties {
     sidebar?: JSX.Element = undefined;
+    match?: any;
 }
 
 export default abstract class BasePage<Properties extends BasePageProperties> extends React.Component<Properties> {
