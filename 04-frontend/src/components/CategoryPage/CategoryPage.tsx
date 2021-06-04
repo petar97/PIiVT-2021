@@ -1,5 +1,7 @@
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import BasePage, { BasePageProperties } from '../BasePage/BasePage';
+import CategoryModel from '../../../../03-backend/src/components/category/model';
 
 class CategoryPageProperties extends BasePageProperties {
     match?: {
@@ -11,7 +13,8 @@ class CategoryPageProperties extends BasePageProperties {
 
 class CategoryPageState {
     title: string = "";
-    subcategories: number[] = [];
+    subcategories: CategoryModel[] = [];
+    showBackButton: boolean = false;
 }
 
 export default class CategoryPage extends BasePage<CategoryPageProperties> {
@@ -22,7 +25,8 @@ export default class CategoryPage extends BasePage<CategoryPageProperties> {
 
         this.state = {
             title: "Loading...",
-            subcategories: []
+            subcategories: [],
+            showBackButton: false,
         };
     }
 
@@ -36,25 +40,90 @@ export default class CategoryPage extends BasePage<CategoryPageProperties> {
 
         if (cId === null) {
             this.setState({
-                title: "All categories",
-                subcategories: [
-                    1, 4, 7, 13, 18,
-                ],
+                subcategories: [],
             });
+            this.apiGetTopLevelCategories();
         } else {
-            this.setState({
-                title: "Category " + cId,
-                subcategories: [
-                    cId,
-                    cId + 10,
-                    cId + 11,
-                    cId + 12,
-                    cId + 13,
-                    cId + 14,
-                    cId + 15,
-                ],
-            });
+            this.apiGetCategory(cId);
         }
+    }
+
+    private apiGetTopLevelCategories() {
+        axios({
+            method: "get",
+            baseURL: "http://localhost:40080",
+            url: "/category",
+            timeout: 10000,
+            responseType: "text",
+            headers: {
+                Authorization: "Bearer FAKE-TOKEN"
+            },
+            // withCredentials: true,
+            maxRedirects: 0,
+        })
+        .then(res => {
+            if (!Array.isArray(res.data)) {
+                throw new Error("Invalid data received.");
+            }
+
+            this.setState({
+                title: "All categories",
+                subcategories: res.data,
+                showBackButton: false,
+            });
+        })
+        .catch(err => {
+            const errorMessage = "" + err;
+
+            if (errorMessage.includes("404")) {
+                this.setState({
+                    title: "No categories found",
+                    subcategories: [],
+                });
+            } else {
+                this.setState({
+                    title: "Unable to load categories",
+                    subcategories: [],
+                });
+            }
+        });
+    }
+
+    private apiGetCategory(cId: number) {
+        axios({
+            method: "get",
+            baseURL: "http://localhost:40080",
+            url: "/category/" + cId,
+            timeout: 10000,
+            responseType: "text",
+            headers: {
+                Authorization: "Bearer FAKE-TOKEN"
+            },
+            // withCredentials: true,
+            maxRedirects: 0,
+        })
+        .then(res => {
+            this.setState({
+                title: res.data?.name,
+                subcategories: res.data?.features,
+                showBackButton: true,
+            });
+        })
+        .catch(err => {
+            const errorMessage = "" + err;
+
+            if (errorMessage.includes("404")) {
+                this.setState({
+                    title: "Category not found",
+                    subcategories: [],
+                });
+            } else {
+                this.setState({
+                    title: "Unable to load category data",
+                    subcategories: [],
+                });
+            }
+        });
     }
 
     componentDidMount() {
@@ -70,21 +139,42 @@ export default class CategoryPage extends BasePage<CategoryPageProperties> {
     renderMain(): JSX.Element {
         return (
             <>
-                <h1>{ this.state.title }</h1>
-                <p>Podkategorije:</p>
-                <ul>
+                <h1>
                     {
-                        this.state.subcategories.map(
-                            cat => (
-                                <li key={ "subcategory-link-" + cat }>
-                                    <Link to={ "/category/" + cat }>
-                                        Potkategorija {cat}
-                                    </Link>
-                                </li>
-                            )
+                        this.state.showBackButton
+                        ? (
+                            <>
+                                <Link to={ "/category/" }>
+                                    &lt; Back
+                                </Link>
+                                |
+                            </>
                         )
+                        : ""
                     }
-                </ul>
+                    { this.state.title }
+                </h1>
+                {
+                    this.state.subcategories.length > 0
+                    ? (
+                        <>
+                            <ul>
+                                {
+                                    this.state.subcategories.map(
+                                        catategory => (
+                                            <li key={ "subcategory-link-" + catategory.categoryId }>
+                                                <Link to={ "/category/" + catategory.categoryId }>
+                                                    { catategory.name }
+                                                </Link>
+                                            </li>
+                                        )
+                                    )
+                                }
+                            </ul>
+                        </>
+                    )
+                    : ""
+                }
             </>
         );
     }
