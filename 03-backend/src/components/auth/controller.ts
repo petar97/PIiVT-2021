@@ -31,11 +31,13 @@ export default class AuthController extends BaseController {
         const authTokenData: ITokenData = {
             id: administrator.administratorId,
             identity: administrator.username,
+            role: "administrator",
         };
 
         const refreshTokenData: ITokenData = {
             id: administrator.administratorId,
             identity: administrator.username,
+            role: "administrator",
         };
 
         const authToken = jwt.sign(
