@@ -6,6 +6,8 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import HomePage from '../HomePage/HomePage';
 import CategoryPage from '../CategoryPage/CategoryPage';
 import ContactPage from '../ContactPage/ContactPage';
+import AdministratorLogin from '../AdministratorLogin/AdministratorLogin';
+import AdministratorLogout from '../AdministratorLogin/AdministratorLogout';
 
 export default function Application(props: any) {
   return (
@@ -27,13 +29,16 @@ export default function Application(props: any) {
                        return ( <CategoryPage {...props} /> );
                      }
                    } />
-                               
+
             <Route path="/contact">
             <ContactPage
                 title="Our location in Belgrade"
                 address="Slučajna 42, 11000 Beograd, Srbija"
                 phone="+381 60 123 456" />
             </Route>
+
+            <Route path="/administrator/login" component={AdministratorLogin} />
+            <Route path="/administrator/logout" component={AdministratorLogout} />
           </Switch>
         </div>
 
