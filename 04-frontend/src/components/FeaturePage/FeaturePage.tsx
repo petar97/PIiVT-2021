@@ -1,63 +1,62 @@
+import BasePage, { BasePageProperties } from "../BasePage/BasePage";
 import { Link } from 'react-router-dom';
-import BasePage, { BasePageProperties } from '../BasePage/BasePage';
-import CategoryService from '../../services/CategoryService';
-import PhoneService from '../../services/PhoneService';
-import CategoryModel from '../../../../03-backend/src/components/category/model';
-import PhoneModel from '../../../../03-backend/src/components/phone/model';
-import FeatureModel from '../../../../03-backend/src/components/feature/model';
+import FeatureModel from "../../../../03-backend/src/components/feature/model";
+import PhoneModel from "../../../../03-backend/src/components/phone/model";
+import CategoryService from "../../services/CategoryService";
+import PhoneService from "../../services/PhoneService";
+import FeatureService from "../../services/FeatureService";
+import { CardDeck } from 'react-bootstrap';
+import PhoneItem from '../Phone/PhoneItem';
 
-class CategoryPageProperties extends BasePageProperties {
+class FeaturePageProperties extends BasePageProperties {
     match?: {
         params: {
-            cid: string;
+            fid: string;
         }
     }
 }
 
-class CategoryPageState {
+class FeaturePageState {
     title: string = "";
-    categories: CategoryModel[] = [];
+    showBackButton: boolean = true;
     features: FeatureModel[] = [];
-    showBackButton: boolean = false;
     phones: PhoneModel[] = [];
 }
 
-export default class CategoryPage extends BasePage<CategoryPageProperties> {
-    state: CategoryPageState;
-
-    constructor(props: CategoryPageProperties) {
+export default class FeaturePage extends BasePage<FeaturePageProperties> {
+    state: FeaturePageState;
+    
+    constructor(props: FeaturePageProperties) {
         super(props);
 
         this.state = {
             title: "Loading...",
-            categories: [],
+            showBackButton: true,
             features: [],
-            showBackButton: false,
             phones: [],
         };
     }
 
-    private getCategoryId(): number|null {
-        console.log("getCategoryId:", this.props);
-        const cid = this.props.match?.params.cid;
-        return cid ? +(cid) : null;
+    private getFeatureId(): number|null {
+        console.log("getFeatureId:", this.props);
+        const fid = this.props.match?.params.fid;
+        return fid ? +(fid) : null;
     }
 
     private getCategoryData() {
-        const cId = this.getCategoryId();
-        console.log("CID:", cId);
-        this.state.categories = [];
+        const fId = this.getFeatureId();
+        console.log("fid:", fId);
         this.state.features = [];
         this.state.phones = [];
 
-        if (cId === null) {
+        if (fId === null) {
             this.setState({
-                categories: [],
+                features: [],
             });
             this.apiGetTopLevelCategories();
         } else {
-            this.apiGetCategory(cId);
-            this.apiGetPhones(cId);
+            this.apiGetFeature(fId);
+            this.apiGetPhones(fId);
         }
     }
 
@@ -81,28 +80,27 @@ export default class CategoryPage extends BasePage<CategoryPageProperties> {
         })
     }
 
-    private apiGetCategory(cId: number) {
-        CategoryService.getCategoryById(cId)
+    private apiGetFeature(fId: number) {
+        FeatureService.getFeatureById(fId)
         .then(result => {
-            console.log("apiGetCategory: ", result);
+            console.log("apiGetFeature: ", result);
             if (result === null) {
                 return this.setState({
-                    title: "Category not found",
-                    categories: [],
+                    title: "Feature not found",
+                    features: [],
                     showBackButton: true,
                 });
             }
 
             this.setState({
                 title: result.name,
-                features: result.features,
                 showBackButton: true,
             });
         })
     }
 
-    private apiGetPhones(cId: number) {
-        PhoneService.getPhonesByFeatureId(cId)
+    private apiGetPhones(fId: number) {
+        PhoneService.getPhonesByFeatureId(fId)
         .then(result => {
             this.setState({
                 phones: result,
@@ -114,14 +112,14 @@ export default class CategoryPage extends BasePage<CategoryPageProperties> {
         this.getCategoryData();
     }
 
-    componentDidUpdate(prevProps: CategoryPageProperties, prevState: CategoryPageState) {
-        if (prevProps.match?.params.cid !== this.props.match?.params.cid) {
+    componentDidUpdate(prevProps: FeaturePageProperties, prevState: FeaturePageState) {
+        if (prevProps.match?.params.fid !== this.props.match?.params.fid) {
             this.getCategoryData();
         }
     }
 
     renderMain(): JSX.Element {
-        return (
+        return(
             <>
                 <h1>
                     {
@@ -138,27 +136,6 @@ export default class CategoryPage extends BasePage<CategoryPageProperties> {
                     }
                     { this.state.title }
                 </h1>
-                {
-                    this.state.categories.length > 0
-                    ? (
-                        <>
-                            <ul>
-                                {
-                                    this.state.categories.map(
-                                        catategory => (
-                                            <li key={ "subcategory-link-" + catategory.categoryId }>
-                                                <Link to={ "/category/" + catategory.categoryId }>
-                                                    { catategory.name }
-                                                </Link>
-                                            </li>
-                                        )
-                                    )
-                                }
-                            </ul>
-                        </>
-                    ) : ""
-                }
-
                 {
                     this.state.features.length > 0
                     ? (
@@ -179,6 +156,14 @@ export default class CategoryPage extends BasePage<CategoryPageProperties> {
                         </>
                     ) : ""
                 }
+
+                <CardDeck className="row">
+                {
+                    this.state.phones.map(phone => (
+                        <PhoneItem key={ "phone-item-" + phone.phoneId } phone={ phone } />
+                    ))
+                }
+                </CardDeck>
             </>
         );
     }

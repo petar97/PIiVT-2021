@@ -9,7 +9,7 @@ class Photo implements IModel {
 class FeatureValue implements IModel {
     featureId: number;
     name?: string;
-    value: string;
+    value?: string;
 }
 
 class PhoneModel implements IModel {
