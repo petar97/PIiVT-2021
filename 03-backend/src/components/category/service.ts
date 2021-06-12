@@ -19,21 +19,23 @@ class CategoryService extends BaseService<CategoryModel>{
         item.categoryId = +(row?.category_id);
         item.name = row?.name;
 
-        if (options.loadFeatures) {
-            item.features = await this.services.featureService.getAllByCategoryId(item.categoryId);
-        }
+        item.features = await this.services.featureService.getAllByCategoryId(item.categoryId);
 
         return item;
     }
 
-    public async getAll(): Promise<CategoryModel[]|IErrorResponse> {
-        return await this.getAllFromTable("category");
+    public async getAll(
+        options: Partial<CategoryModelAdapterOptions> = { }
+    ): Promise<CategoryModel[]|IErrorResponse> {
+        console.log("options1", options);
+        return await this.getAllFromTable("category", options);
     }
 
     public async getById(
         categoryId: number,
         options: Partial<CategoryModelAdapterOptions> = { }
     ): Promise<CategoryModel|IErrorResponse|null> {
+        console.log("options2", options);
         return await this.getByIdFromTable("category", categoryId, options);
     }
 

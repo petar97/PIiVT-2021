@@ -12,6 +12,7 @@ import EventRegister from '../../api/EventRegister';
 import api from '../../api/api';
 import FeaturePage from '../FeaturePage/FeaturePage';
 import PhonePage from '../Phone/PhonePage';
+import CategoryDashboardList from '../Administrator/Dashboard/Category/CategoryDashboardList';
 
 class ApplicationState {
   authorizedRole: "administrator" | "visitor" = "visitor";
@@ -102,6 +103,8 @@ export default class Application extends React.Component {
 
               <Route path="/administrator/login" component={AdministratorLogin} />
               <Route path="/administrator/logout" component={AdministratorLogout} />
+
+              <Route exact path="/dashboard/category" component={CategoryDashboardList} />
             </Switch>
           </div>
 
