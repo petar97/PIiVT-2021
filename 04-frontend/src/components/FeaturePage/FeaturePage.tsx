@@ -7,6 +7,7 @@ import PhoneService from "../../services/PhoneService";
 import FeatureService from "../../services/FeatureService";
 import { CardDeck } from 'react-bootstrap';
 import PhoneItem from '../Phone/PhoneItem';
+import { features } from 'process';
 
 class FeaturePageProperties extends BasePageProperties {
     match?: {
@@ -95,6 +96,13 @@ export default class FeaturePage extends BasePage<FeaturePageProperties> {
             this.setState({
                 title: result.name,
                 showBackButton: true,
+                features: [
+                    {
+                        featureId: result.featureId,
+                        name: result.name,
+                        categoryId: result.categoryId
+                    }
+                ]
             });
         })
     }
@@ -126,7 +134,7 @@ export default class FeaturePage extends BasePage<FeaturePageProperties> {
                         this.state.showBackButton
                         ? (
                             <>
-                                <Link to={ "/category/" }>
+                                <Link to={ "/category/" + this.state.features[0]?.categoryId }>
                                     &lt; Back
                                 </Link> | { this.state.title }
                             </>
@@ -135,7 +143,7 @@ export default class FeaturePage extends BasePage<FeaturePageProperties> {
                     }
                 </h1>
                 {
-                    this.state.features.length > 0
+                    this.state.features.length > 1
                     ? (
                         <>
                             <ul>
