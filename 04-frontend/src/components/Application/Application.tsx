@@ -11,6 +11,7 @@ import AdministratorLogout from '../AdministratorLogout/AdministratorLogout';
 import EventRegister from '../../api/EventRegister';
 import api from '../../api/api';
 import FeaturePage from '../FeaturePage/FeaturePage';
+import PhonePage from '../Phone/PhonePage';
 
 class ApplicationState {
   authorizedRole: "administrator" | "visitor" = "visitor";
@@ -85,6 +86,8 @@ export default class Application extends React.Component {
                           return ( <FeaturePage {...props} /> );
                         }
                      } />
+
+              <Route path="/phone/:pid" component={ PhonePage } />
 
               <Route path="/contact">
                 <ContactPage

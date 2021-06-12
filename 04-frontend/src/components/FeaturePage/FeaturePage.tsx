@@ -128,13 +128,11 @@ export default class FeaturePage extends BasePage<FeaturePageProperties> {
                             <>
                                 <Link to={ "/category/" }>
                                     &lt; Back
-                                </Link>
-                                |
+                                </Link> | { this.state.title }
                             </>
                         )
                         : ""
                     }
-                    { this.state.title }
                 </h1>
                 {
                     this.state.features.length > 0

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Col, Card } from 'react-bootstrap';
+import { Col, Card, Row } from 'react-bootstrap';
 import * as path from "path";
 import PhoneModel from "../../../../03-backend/src/components/phone/model";
 import { AppConfiguration } from "../../config/app.config";
@@ -24,16 +24,24 @@ export default function PhoneItem(props: PhoneItemProperties) {
                     <Card.Img variant="top" src={ getThumbPath(AppConfiguration.API_URL + "/" + props.phone.photos[0]?.imagePath) } />
                 </Link>
                 <Card.Body>
-                    <Card.Title>
-                        <Link to={ "/phone/" + props.phone.phoneId }>
-                            { props.phone.title }
-                        </Link>
-                    </Card.Title>
-                    <Card.Text as="div">
+                    <Row>
+                        <Col>
+                            <Card.Title>
+                                <Link to={ "/phone/" + props.phone.phoneId }>
+                                    { props.phone.title }
+                                </Link>
+                            </Card.Title>
+                        </Col>
+
+                        <Col className="text-center">
+                            <Card.Text as="div" className="h5">
+                                <b>&euro; { props.phone.price }</b>
+                            </Card.Text>
+                        </Col>
+                    </Row>
+                    
+                    <Card.Text as="div" className="text-truncate">
                         { props.phone.description }
-                    </Card.Text>
-                    <Card.Text as="div">
-                        <b>&euro; { props.phone.price }</b>
                     </Card.Text>
                 </Card.Body>
             </Card>

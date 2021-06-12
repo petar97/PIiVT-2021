@@ -130,13 +130,12 @@ export default class CategoryPage extends BasePage<CategoryPageProperties> {
                             <>
                                 <Link to={ "/category/" }>
                                     &lt; Back
-                                </Link>
-                                |
+                                </Link> |
                             </>
                         )
                         : ""
                     }
-                    { this.state.title }
+                    { " " + this.state.title }
                 </h1>
                 {
                     this.state.categories.length > 0
