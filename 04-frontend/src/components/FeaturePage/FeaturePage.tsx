@@ -7,7 +7,6 @@ import PhoneService from "../../services/PhoneService";
 import FeatureService from "../../services/FeatureService";
 import { CardDeck } from 'react-bootstrap';
 import PhoneItem from '../Phone/PhoneItem';
-import { features } from 'process';
 
 class FeaturePageProperties extends BasePageProperties {
     match?: {
