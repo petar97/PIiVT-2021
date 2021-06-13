@@ -1,0 +1,3517 @@
+{
+	"info": {
+		"_postman_id": "17d5a8f8-298a-4e7a-89ea-066afdd87213",
+		"name": "Testiranje back-end dela (API)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "GET all categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/category",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET all categories",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/category",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"category"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "79"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4f-d2cSRKMyWvA24PlP/olTn7s3ryY\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 25 May 2021 08:47:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"categoryId\": 1,\n        \"name\": \"Kategorija 1\"\n    },\n    {\n        \"categoryId\": 2,\n        \"name\": \"Kategorija 2\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "GET a single category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/category/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET a single category - for an existing category ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/category/1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"category",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-tfYxt7IkINQVHxqvGcQKz3qdWyI\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 25 May 2021 09:01:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categoryId\": 1,\n    \"name\": \"Kategorija 1\"\n}"
+						},
+						{
+							"name": "GET a single category - with an invalid category ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/category/-2",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"category",
+										"-2"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "11"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b-EFiDB1U+dmqzx9Mo2UjcZ1SJPO8\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 25 May 2021 09:02:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Bad Request"
+						},
+						{
+							"name": "GET a single category - with an ID of a non existing category",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/category/36",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"category",
+										"36"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 25 May 2021 09:02:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						}
+					]
+				},
+				{
+					"name": "POST a new category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Kategorija za brisanje\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/category",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST a new category - with a valid data structure",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Test Category\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/category",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"category"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "39"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"27-dhBCguekUvWvchSQyPxvECxiEDQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 May 2021 17:12:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categoryId\": 6,\n    \"name\": \"Test Category\"\n}"
+						},
+						{
+							"name": "POST a new category - with an invalid data structure",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"A\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/category",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"category"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "162"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a2-mIVpkZDd+Z4K98rkdaZ2WcDVoQ0\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 27 May 2021 17:13:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"instancePath\": \"/name\",\n        \"schemaPath\": \"#/properties/name/minLength\",\n        \"keyword\": \"minLength\",\n        \"params\": {\n            \"limit\": 2\n        },\n        \"message\": \"must NOT have fewer than 2 characters\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "PUT to edit an existing category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Promenjena test kategorija\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/category/6",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"category",
+								"6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PUT to edit an existing category - valid response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Promenjena test kategorija\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/category/6",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"category",
+										"6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "52"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"34-EKf2wBJEYfvStRwy9jB5dY3dDjU\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 May 2021 15:50:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categoryId\": 6,\n    \"name\": \"Promenjena test kategorija\"\n}"
+						},
+						{
+							"name": "PUT to edit an existing category - with a non existing category ID",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Promenjena test kategorija\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/category/65",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"category",
+										"65"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 May 2021 15:51:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						},
+						{
+							"name": "PUT to edit an existing category - with invalid data",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"A\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/category/6",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"category",
+										"6"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "162"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"a2-mIVpkZDd+Z4K98rkdaZ2WcDVoQ0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 May 2021 15:51:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"instancePath\": \"/name\",\n        \"schemaPath\": \"#/properties/name/minLength\",\n        \"keyword\": \"minLength\",\n        \"params\": {\n            \"limit\": 2\n        },\n        \"message\": \"must NOT have fewer than 2 characters\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "DELETE a category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/category/7",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"category",
+								"7"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DELETE a category - with valid ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/category/7",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"category",
+										"7"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f-p0IWcFbTUcb+dTYThuDZc68xZQk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 May 2021 09:34:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"errorMessage\": \"Record deleted\"\n}"
+						},
+						{
+							"name": "DELETE a category - with an invalid ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/category/7",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"category",
+										"7"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "66"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"42-a4/6APUuqrwmh3udkNMeBsEo/Vc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 May 2021 09:35:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": -1,\n    \"errorMessage\": \"This record could not be deleted\"\n}"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{API_ADMIN_AUTH_TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Feature",
+			"item": [
+				{
+					"name": "GET a single feature",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/feature/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"feature",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET a single feature - with a valid ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/feature/1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"feature",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "102"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"66-wjd3y9O6Bj6DGiR4YMDN1wfKeC0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 30 May 2021 13:00:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categoryId\": 1,\n    \"category\": {\n        \"categoryId\": 1,\n        \"name\": \"Operativni sistem\"\n    },\n    \"featureId\": 1,\n    \"name\": \"Android\"\n}"
+						},
+						{
+							"name": "GET a single feature - with a non existing feature ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/feature/14",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"feature",
+										"14"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 11:57:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						}
+					]
+				},
+				{
+					"name": "GET all features of a category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/category/5/feature",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"category",
+								"5",
+								"feature"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET all features of a category - with a valid category ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/category/5/feature",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"category",
+										"5",
+										"feature"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "178"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b2-ZXKcfpTxmg0pfTP7fGSLaIaOaXA\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 11:57:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"categoryId\": 5,\n        \"category\": {\n            \"categoryId\": 5,\n            \"name\": \"Network\"\n        },\n        \"featureId\": 4,\n        \"name\": \"3G\"\n    },\n    {\n        \"categoryId\": 5,\n        \"category\": {\n            \"categoryId\": 5,\n            \"name\": \"Network\"\n        },\n        \"featureId\": 5,\n        \"name\": \"LTE\"\n    }\n]"
+						},
+						{
+							"name": "GET all features of a category - with a non existing category ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/category/55/feature",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"category",
+										"55",
+										"feature"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 11:58:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[]"
+						}
+					]
+				},
+				{
+					"name": "POST  a new feature",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"LTE\",\r\n    \"categoryId\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/feature",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"feature"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST  a new feature",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"LTE\",\r\n    \"categoryId\": 5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/feature",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"feature"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "88"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"58-xlFBnE0g/0MS0dIy3RMm0NIugjQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 08:46:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categoryId\": 5,\n    \"category\": {\n        \"categoryId\": 5,\n        \"name\": \"Network\"\n    },\n    \"featureId\": 5,\n    \"name\": \"LTE\"\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT to edit an existing feature",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"3G\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/feature/4",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"feature",
+								"4"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PUT to edit an existing feature",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"3G\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/feature/4",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"feature",
+										"4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "87"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"57-lbMJN0irVVo2O4wJ0HzT6+iqBe0\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 08:46:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categoryId\": 5,\n    \"category\": {\n        \"categoryId\": 5,\n        \"name\": \"Network\"\n    },\n    \"featureId\": 4,\n    \"name\": \"3G\"\n}"
+						},
+						{
+							"name": "PUT to edit an existing feature - with a non existing feature ID",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"3G\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/feature/44",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"feature",
+										"44"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 31 May 2021 11:59:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Phone",
+			"item": [
+				{
+					"name": "GET a single phone",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/phone/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"phone",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET a single phone",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/phone/1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"phone",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "474"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1da-dddJBfPrRCr3xTmWtmO4otPT2g4\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 02 Jun 2021 14:19:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categories\": [\n        {\n            \"categoryId\": 1,\n            \"name\": \"Operativni sistem\"\n        },\n        {\n            \"categoryId\": 2,\n            \"name\": \"RAM\"\n        },\n        {\n            \"categoryId\": 3,\n            \"name\": \"Storage\"\n        }\n    ],\n    \"photos\": [\n        {\n            \"photoId\": 1,\n            \"imagePath\": \"static/uploads/2021/05/1.jpg\"\n        },\n        {\n            \"photoId\": 2,\n            \"imagePath\": \"static/uploads/2021/05/1-all.jpg\"\n        }\n    ],\n    \"features\": [\n        {\n            \"featureId\": 2,\n            \"name\": \"iOS\",\n            \"value\": \"14\"\n        },\n        {\n            \"featureId\": 4,\n            \"name\": \"3G\",\n            \"value\": \"3.5G\"\n        }\n    ],\n    \"phoneId\": 1,\n    \"title\": \"iPhone 12\",\n    \"description\": \"Opis za iPhone 12...\",\n    \"createdAt\": \"2021-06-01T15:11:07.000Z\",\n    \"price\": 800.49\n}"
+						}
+					]
+				},
+				{
+					"name": "POST a new phone",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "data",
+									"value": "{\n\t\"title\": \"iPhone Xs\",\n\t\"description\": \"Opis za iPhone Xs...\",\n\t\"price\": 600.33,\n\t\"features\": [{\n\t\t\t\"featureId\": 2,\n\t\t\t\"value\": \"12\"\n\t\t},\n\t\t{\n\t\t\t\"featureId\": 6,\n\t\t\t\"value\": \"4.5G\"\n\t\t},\n\t\t{\n\t\t\t\"featureId\": 9,\n\t\t\t\"value\": \"4GB\"\n\t\t},\n\t\t{\n\t\t\t\"featureId\": 11,\n\t\t\t\"value\": \"5.9\\\"\"\n\t\t},\n\t\t{\n\t\t\t\"featureId\": 14,\n\t\t\t\"value\": \"64GB\"\n\t\t}\n\t]\n}\n",
+									"type": "text"
+								},
+								{
+									"key": "photo1",
+									"type": "file",
+									"src": "/C:/Users/Legenda/Pictures/Saved Pictures/New folder/GY8Rg8f.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_URL}}/phone",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"phone"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST a new phone",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "data",
+											"value": "{\n\t\"title\": \"Samsung Galaxy S8\",\n\t\"description\": \"Opis za Samsung Galaxy S8...\",\n\t\"price\": 325.25,\n\t\"features\": [{\n\t\t\t\"featureId\": 1,\n\t\t\t\"value\": \"9\"\n\t\t},\n\t\t{\n\t\t\t\"featureId\": 4,\n\t\t\t\"value\": \"3.5G\"\n\t\t},\n\t\t{\n\t\t\t\"featureId\": 9,\n\t\t\t\"value\": \"4GB\"\n\t\t},\n\t\t{\n\t\t\t\"featureId\": 11,\n\t\t\t\"value\": \"5.8\\\"\"\n\t\t},\n\t\t{\n\t\t\t\"featureId\": 14,\n\t\t\t\"value\": \"64GB\"\n\t\t}\n\t]\n}\n",
+											"type": "text"
+										},
+										{
+											"key": "photo1",
+											"type": "file",
+											"src": "/C:/Users/Legenda/Pictures/Saved Pictures/New folder/ronan-furuta-ZJ8M0bfiu8U-unsplash.jpg"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/phone",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"phone"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "536"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"218-lb4rrwvJwgJAy73zAOHCHZldY5Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 02 Jun 2021 12:40:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categories\": [],\n    \"photos\": [\n        {\n            \"photoId\": 50,\n            \"imagePath\": \"static/uploads/2021/06/b023d0d3-04f6-4022-8384-4e64f55c7fe8-ronan-furuta-ZJ8M0bfiu8U-unsplash.jpg\"\n        }\n    ],\n    \"features\": [\n        {\n            \"featureId\": 1,\n            \"name\": \"Android\",\n            \"value\": \"9\"\n        },\n        {\n            \"featureId\": 4,\n            \"name\": \"3G\",\n            \"value\": \"3.5G\"\n        },\n        {\n            \"featureId\": 9,\n            \"name\": \"2-6GB\",\n            \"value\": \"4GB\"\n        },\n        {\n            \"featureId\": 11,\n            \"name\": \"<6''\",\n            \"value\": \"5.8\\\"\"\n        },\n        {\n            \"featureId\": 14,\n            \"name\": \"<128GB\",\n            \"value\": \"64GB\"\n        }\n    ],\n    \"phoneId\": 44,\n    \"title\": \"Samsung Galaxy S8\",\n    \"description\": \"Opis za Samsung Galaxy S8...\",\n    \"createdAt\": \"2021-06-02T13:40:58.000Z\",\n    \"price\": 325.25\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT to edit an existing article",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"iPhone 12\",\r\n    \"description\": \"Opis za iPhone 12...\",\r\n    \"price\": 800.49,\r\n    \"features\": [\r\n        {\r\n            \"featureId\": 2,\r\n            \"value\": \"14\"\r\n        },\r\n        {\r\n            \"featureId\": 4,\r\n            \"value\": \"3.0G\"\r\n        },\r\n        {\r\n            \"featureId\": 9,\r\n            \"value\": \"4GB\"\r\n        },\r\n        {\r\n            \"featureId\": 12,\r\n            \"value\": \"6.1\\\"\"\r\n        },\r\n        {\r\n            \"featureId\": 14,\r\n            \"value\": \"64GB\"\r\n        }\r\n\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/phone/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"phone",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PUT to edit an existing article",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"iPhone 12\",\r\n    \"description\": \"Opis za iPhone 12...\",\r\n    \"price\": 800.49,\r\n    \"features\": [\r\n        {\r\n            \"featureId\": 2,\r\n            \"value\": \"14\"\r\n        },\r\n        {\r\n            \"featureId\": 4,\r\n            \"value\": \"3.0G\"\r\n        },\r\n        {\r\n            \"featureId\": 9,\r\n            \"value\": \"4GB\"\r\n        },\r\n        {\r\n            \"featureId\": 12,\r\n            \"value\": \"6.1\\\"\"\r\n        },\r\n        {\r\n            \"featureId\": 14,\r\n            \"value\": \"64GB\"\r\n        }\r\n\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/phone/1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"phone",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "617"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"269-d321vanpYAH5negr0zgH2NHa0u0\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 02 Jun 2021 14:33:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categories\": [\n        {\n            \"categoryId\": 1,\n            \"name\": \"Operativni sistem\"\n        },\n        {\n            \"categoryId\": 2,\n            \"name\": \"RAM\"\n        },\n        {\n            \"categoryId\": 3,\n            \"name\": \"Storage\"\n        }\n    ],\n    \"photos\": [\n        {\n            \"photoId\": 1,\n            \"imagePath\": \"static/uploads/2021/05/1.jpg\"\n        },\n        {\n            \"photoId\": 2,\n            \"imagePath\": \"static/uploads/2021/05/1-all.jpg\"\n        }\n    ],\n    \"features\": [\n        {\n            \"featureId\": 2,\n            \"name\": \"iOS\",\n            \"value\": \"14\"\n        },\n        {\n            \"featureId\": 4,\n            \"name\": \"3G\",\n            \"value\": \"3.0G\"\n        },\n        {\n            \"featureId\": 9,\n            \"name\": \"2-6GB\",\n            \"value\": \"4GB\"\n        },\n        {\n            \"featureId\": 12,\n            \"name\": \"6-6.5''\",\n            \"value\": \"6.1\\\"\"\n        },\n        {\n            \"featureId\": 14,\n            \"name\": \"<128GB\",\n            \"value\": \"64GB\"\n        }\n    ],\n    \"phoneId\": 1,\n    \"title\": \"iPhone 12\",\n    \"description\": \"Opis za iPhone 12...\",\n    \"createdAt\": \"2021-06-01T15:11:07.000Z\",\n    \"price\": 800.49\n}"
+						},
+						{
+							"name": "PUT to edit an existing article - with an invalid ID",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"iPhone 12\",\r\n    \"description\": \"Opis za iPhone 12...\",\r\n    \"price\": 800.49,\r\n    \"features\": [\r\n        {\r\n            \"featureId\": 2,\r\n            \"value\": \"14\"\r\n        },\r\n        {\r\n            \"featureId\": 4,\r\n            \"value\": \"3.0G\"\r\n        },\r\n        {\r\n            \"featureId\": 9,\r\n            \"value\": \"4GB\"\r\n        },\r\n        {\r\n            \"featureId\": 12,\r\n            \"value\": \"6.1\\\"\"\r\n        },\r\n        {\r\n            \"featureId\": 14,\r\n            \"value\": \"64GB\"\r\n        }\r\n\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/phone/11",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"phone",
+										"11"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 02 Jun 2021 14:35:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						}
+					]
+				},
+				{
+					"name": "DELETE an existing article",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/phone/46",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"phone",
+								"46"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DELETE an existing article",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/phone/46",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"phone",
+										"46"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f-jxRRJWDyfwHqwUIyZ993i8T8lN8\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 12:55:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"errorMessage\": \"Phone deleted!\"\n}"
+						},
+						{
+							"name": "DELETE an existing article - with an invalid ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/phone/464",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"phone",
+										"464"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 12:56:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						}
+					]
+				},
+				{
+					"name": "DELETE a single photo of a phone",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/phone/47/photo/53",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"phone",
+								"47",
+								"photo",
+								"53"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DELETE a single photo of a phone",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/phone/47/photo/53",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"phone",
+										"47",
+										"photo",
+										"53"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f-+DFY8+0YM+KyTge7bv5hfEa9mXg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 13:15:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"errorMessage\": \"Photo deleted.\"\n}"
+						},
+						{
+							"name": "DELETE a single photo of a phone - with an invalid phone or photo ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/phone/47/photo/531",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"phone",
+										"47",
+										"photo",
+										"531"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 13:16:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						}
+					]
+				},
+				{
+					"name": "POST new photos to an article",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo1",
+									"type": "file",
+									"src": "/C:/Users/Legenda/Pictures/Saved Pictures/New folder/GY8Rg8f.png"
+								},
+								{
+									"key": "photo2",
+									"type": "file",
+									"src": "/C:/Users/Legenda/Pictures/Saved Pictures/Walls II/wallhaven-429p9n_1920x1080.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{API_URL}}/phone/47/photo",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"phone",
+								"47",
+								"photo"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST new photos to an article",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "photo1",
+											"type": "file",
+											"src": "/C:/Users/Legenda/Pictures/Saved Pictures/New folder/GY8Rg8f.png"
+										},
+										{
+											"key": "photo2",
+											"type": "file",
+											"src": "/C:/Users/Legenda/Pictures/Saved Pictures/Walls II/wallhaven-429p9n_1920x1080.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{API_URL}}/phone/47/photo",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"phone",
+										"47",
+										"photo"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "611"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"263-W/bGCBCNqH53Wzd1G6XqYfrYXws\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 13:27:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"categories\": [],\n    \"photos\": [\n        {\n            \"photoId\": 54,\n            \"imagePath\": \"static/uploads/2021/06/d1fda9a7-9b45-45b7-afd6-9e1ca6ab29cc-GY8Rg8f.png\"\n        },\n        {\n            \"photoId\": 55,\n            \"imagePath\": \"static/uploads/2021/06/0ea71f25-b73a-465e-90b8-20b088ef3f1a-wallhaven-429p9n_1920x1080.png\"\n        }\n    ],\n    \"features\": [\n        {\n            \"featureId\": 2,\n            \"name\": \"iOS\",\n            \"value\": \"12\"\n        },\n        {\n            \"featureId\": 6,\n            \"name\": \"4G\",\n            \"value\": \"4.5G\"\n        },\n        {\n            \"featureId\": 9,\n            \"name\": \"2-6GB\",\n            \"value\": \"4GB\"\n        },\n        {\n            \"featureId\": 11,\n            \"name\": \"<6''\",\n            \"value\": \"5.9\\\"\"\n        },\n        {\n            \"featureId\": 14,\n            \"name\": \"<128GB\",\n            \"value\": \"64GB\"\n        }\n    ],\n    \"phoneId\": 47,\n    \"title\": \"iPhone Xs\",\n    \"description\": \"Opis za iPhone Xs...\",\n    \"createdAt\": \"2021-06-03T13:55:44.000Z\",\n    \"price\": 600.33\n}"
+						},
+						{
+							"name": "POST new photos to an article - with an invalid ID",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "photo1",
+											"type": "file",
+											"src": "/C:/Users/Legenda/Pictures/Saved Pictures/New folder/GY8Rg8f.png"
+										},
+										{
+											"key": "photo2",
+											"type": "file",
+											"src": "/C:/Users/Legenda/Pictures/Saved Pictures/Walls II/wallhaven-429p9n_1920x1080.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{API_URL}}/phone/471/photo",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"phone",
+										"471",
+										"photo"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 13:28:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						}
+					]
+				},
+				{
+					"name": "GET all articles by feature",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/feature/1/phone",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"feature",
+								"1",
+								"phone"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET all articles by feature",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/feature/1/phone",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"feature",
+										"1",
+										"phone"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:8000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "562"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"232-EJsHLKYPQSe4IeW2W8aRNi8VzPE\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 11 Jun 2021 09:26:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"phoneId\": 40,\n        \"title\": \"Samsung Galaxy S21\",\n        \"description\": \"Opis za Samsung Galaxy S21...\",\n        \"createdAt\": \"2021-06-02T13:30:20.000Z\",\n        \"price\": \"999.35\",\n        \"features\": [\n            {\n                \"featureId\": 1,\n                \"value\": \"11\"\n            }\n        ]\n    },\n    {\n        \"phoneId\": 42,\n        \"title\": \"Samsung Galaxy S20\",\n        \"description\": \"Opis za Samsung Galaxy S20...\",\n        \"createdAt\": \"2021-06-02T13:36:08.000Z\",\n        \"price\": \"799.97\",\n        \"features\": [\n            {\n                \"featureId\": 1,\n                \"value\": \"10\"\n            }\n        ]\n    },\n    {\n        \"phoneId\": 44,\n        \"title\": \"Samsung Galaxy S8\",\n        \"description\": \"Opis za Samsung Galaxy S8...\",\n        \"createdAt\": \"2021-06-02T13:40:58.000Z\",\n        \"price\": \"325.25\",\n        \"features\": [\n            {\n                \"featureId\": 1,\n                \"value\": \"9\"\n            }\n        ]\n    }\n]"
+						},
+						{
+							"name": "GET all articles by feature - with an invalid feature ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/feature/1241/phone",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"feature",
+										"1241",
+										"phone"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:8000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 11 Jun 2021 09:42:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[]"
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{API_ADMIN_AUTH_TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Administrator",
+			"item": [
+				{
+					"name": "GET all administrators",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/administrator",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"administrator"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET all administrators",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/administrator",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"administrator"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "136"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"88-QulcSf1jRHty+9J8QFcpy8tUV8M\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 14:10:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"administratorId\": 1,\n        \"username\": \"petar\",\n        \"passwordHash\": \"$2b$11$oKLmOfpi5V2oUUdD3wSI8u84klqE/ZVgJ8OXvDMUNKB1x5qtuPP4G\",\n        \"isActive\": true\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "GET a single administrator",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/administrator/1",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"administrator",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET a single administrator",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/administrator/1",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"administrator",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "134"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"86-xnWMFw1NvsNBsw/vVNe6o+qgR4o\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 14:10:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 1,\n    \"username\": \"petar\",\n    \"passwordHash\": \"$2b$11$oKLmOfpi5V2oUUdD3wSI8u84klqE/ZVgJ8OXvDMUNKB1x5qtuPP4G\",\n    \"isActive\": true\n}"
+						},
+						{
+							"name": "GET a single administrator - with an invalid ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/administrator/112",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"administrator",
+										"112"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 14:11:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						}
+					]
+				},
+				{
+					"name": "POST a new administrator",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/administrator",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"administrator"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST a new administrator",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"petar\",\r\n    \"password\": \"test123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/administrator",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"administrator"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "134"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"86-xnWMFw1NvsNBsw/vVNe6o+qgR4o\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 14:07:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 1,\n    \"username\": \"petar\",\n    \"passwordHash\": \"$2b$11$oKLmOfpi5V2oUUdD3wSI8u84klqE/ZVgJ8OXvDMUNKB1x5qtuPP4G\",\n    \"isActive\": true\n}"
+						},
+						{
+							"name": "POST a new administrator - with an already used username",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"petar\",\r\n    \"password\": \"test123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/administrator",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"administrator"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "95"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5f-GpRRpWrvaNR78aa4BClQUzZZBuE\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 14:08:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 1062,\n    \"errorMessage\": \"Duplicate entry 'petar' for key 'uq_administrator_username'\"\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT new data for an existing administrator",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"admin123\",\r\n    \"isActive\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/administrator/3",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"administrator",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PUT new data for an existing administrator",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"admin123\",\r\n    \"isActive\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/administrator/3",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"administrator",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "135"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"87-/THdinY6rJl+QEk+1lSTrQxewlE\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 14:18:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"administratorId\": 3,\n    \"username\": \"admin\",\n    \"passwordHash\": \"$2b$11$1Il79m2gXH6UDSvFf5zPB.X1tw1QbI.v7lMQV9PmkWBiPnc1f6zwK\",\n    \"isActive\": false\n}"
+						},
+						{
+							"name": "PUT new data for an existing administrator - with an invalid ID",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"admin123\",\r\n    \"isActive\": false\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/administrator/31",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"administrator",
+										"31"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 14:19:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						}
+					]
+				},
+				{
+					"name": "DELETE an administrator",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/administrator/3",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"administrator",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DELETE an administrator",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/administrator/3",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"administrator",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-+/zHhg+84sQie8xvQmB03Ijwjc4\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 14:22:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"errorMessage\": \"Deleted 1 records.\"\n}"
+						},
+						{
+							"name": "DELETE an administrator - with an invalid ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/administrator/333",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"administrator",
+										"333"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"33-fdUR+kEYPKq0iXOrFKT1mW2QMoM\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 14:23:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errorCode\": 0,\n    \"errorMessage\": \"Deleted 0 records.\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "POST a new login request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/auth/administrator/login",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"auth",
+								"administrator",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST a new login request - when the admin doesn't exist",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"nekiuser\",\r\n    \"password\": \"admin123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/auth/administrator/login",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"auth",
+										"administrator",
+										"login"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"9-0gXL1ngzMqISxa6S1zx3F4wtLyg\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 16:45:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Not Found"
+						},
+						{
+							"name": "POST a new login request - with an invalid password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"petar\",\r\n    \"password\": \"admin3211\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/auth/administrator/login",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"auth",
+										"administrator",
+										"login"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f-6m/3ihwm3QpkaqHI5ehdTGQq6J0\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 16:46:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Invalid administrator password."
+						},
+						{
+							"name": "POST a new login request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"petar\",\r\n    \"password\": \"test123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/auth/administrator/login",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"auth",
+										"administrator",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1006"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3ee-6gbv2/byNCwqCE7P0/0J/17Fs0k\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 16:50:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"authToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWRlbnRpdHkiOiJwZXRhciIsImlhdCI6MTYyMjczOTAwMiwiZXhwIjoxNjIzMzQzODAyLCJpc3MiOiJsb2NhbGhvc3QifQ.wZdDpj3LcLx7kOtK7N73VFQHcYzBr_WVRMWGKlrKlbeDHUncB6XNREUhb2AzO8C7YX9d5qZNV_mBGeS7UTOEJG1EbDuvx7w6B-ugRT01SNphqfEwbYUo5rfa6BSAekf5RS6-Clx1Hc2fUeUZ-RhFdNvc8hPsQTqiSH2fgSCzkWtDID_u-lm0NT2xaWZ9-cSW2Cjppn0mPcovvpTZeWdgNKkdfis3PnnK0BmAegzrlo6yyYPZFaSXj68XsvSDyM4S_LZNjeYaUiNgfxq-kt05hkFM9gBX6TkMsRtRBrzUSLRFJs_nYhwSnTKVkMPVF78LNCD7ZXLGH4OkYVI64bByOg\",\n    \"refreshToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWRlbnRpdHkiOiJwZXRhciIsImlhdCI6MTYyMjczOTAwMiwiZXhwIjoxNjU0Mjc1MDAyLCJpc3MiOiJsb2NhbGhvc3QifQ.kFYAwRnUumBPcj3uq5pOYAWsOZWWPeMsTrs-kNIzNKWxy1cNztDCvs8aD9Mk12f4J32aW41Mlhg3C4YSeyqSCNIc0eB2pxOdtTCWtNnaBcEP7NAZffKP8SmLl7UC5r7fgb67e4eNdoNIusNjuJrrGTGbrIoeJ9Iw38H9CHchJYuP8UJmUzwBB3KgsbJUA3l6n0Asc6zqCUyh-FdOzDNzc_uwCPIDJ6grZAI2dujNj5rAmQMfEv9QTPpoqfZX5ZpyAGN7wYU8hMKGG6PK2s6VbJ9GJ_SKuxuoQyvdBmgbyDG0ifXKqhcN39A-xtQeY4hRPeL_-FXdfon8CjoWkue72w\"\n}"
+						},
+						{
+							"name": "POST a new login request - when the account is inactive",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"petar\",\r\n    \"password\": \"test123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/auth/administrator/login",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"auth",
+										"administrator",
+										"login"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f-gGX/kiT3mamimbuyelW2JDm0OL8\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 03 Jun 2021 16:55:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Administrator account inactive."
+						}
+					]
+				},
+				{
+					"name": "POST a new token refresh request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWRlbnRpdHkiOiJwZXRhciIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjIzMTQ1MjYwLCJleHAiOjE2NTQ2ODEyNjAsImlzcyI6ImxvY2FsaG9zdCJ9.nW6BECmb3Um3T2BXUlRhQhcPEBT4LYeKzb5XO-aXlIXxf5rD_gfyb_vJ4zi7itQLT4K1L9r5xwH7vYoCNoWvcHpT-it1goMGKLlPh7M97GjdFZ9mA9d6fFoLHqP4VvwkOL7AnTTMR9ELMjPGg1_qEmLGGRuf40e7gLGRHuRYIC3e8EFS1KDjTQqd3vNISAsB1MnirHHGRfvxpy05QsTOdvujmEHtxKjiMUdgjMQQ3GGfAXa5R7JJn-rP8nUxt97cUX88hRqXC2_jh8eD6N-IAQ9M7P066QRFg_QHXl1SBhQkjOtXlTmXMk--F707GGRw7Bhjo2LMvoPcF9fvWTZ5Wg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/auth/administrator/refresh",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"auth",
+								"administrator",
+								"refresh"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST a new token refresh request - no refresh token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"refreshToken\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/auth/administrator/refresh",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"auth",
+										"administrator",
+										"refresh"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:8000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-xnXyNLUHmOEF64WAWgWQDNhZTi4\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 08 Jun 2021 09:39:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Invalid refresh token: jwt must be provided"
+						},
+						{
+							"name": "POST a new token refresh request - with bad token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"refreshToken\": \"123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/auth/administrator/refresh",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"auth",
+										"administrator",
+										"refresh"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "html",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:8000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/html; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"24-Cv7RxFtqE6HLKrPqagpaeWKpU2Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 08 Jun 2021 09:40:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "Invalid refresh token: jwt malformed"
+						},
+						{
+							"name": "POST a new token refresh request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"refreshToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWRlbnRpdHkiOiJwZXRhciIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjIzMTQ1MjYwLCJleHAiOjE2NTQ2ODEyNjAsImlzcyI6ImxvY2FsaG9zdCJ9.nW6BECmb3Um3T2BXUlRhQhcPEBT4LYeKzb5XO-aXlIXxf5rD_gfyb_vJ4zi7itQLT4K1L9r5xwH7vYoCNoWvcHpT-it1goMGKLlPh7M97GjdFZ9mA9d6fFoLHqP4VvwkOL7AnTTMR9ELMjPGg1_qEmLGGRuf40e7gLGRHuRYIC3e8EFS1KDjTQqd3vNISAsB1MnirHHGRfvxpy05QsTOdvujmEHtxKjiMUdgjMQQ3GGfAXa5R7JJn-rP8nUxt97cUX88hRqXC2_jh8eD6N-IAQ9M7P066QRFg_QHXl1SBhQkjOtXlTmXMk--F707GGRw7Bhjo2LMvoPcF9fvWTZ5Wg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/auth/administrator/refresh",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"auth",
+										"administrator",
+										"refresh"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:8000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "552"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"228-OFHmrBFbzq1AqbC8Z1sPmJ52f70\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 08 Jun 2021 09:41:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"authToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWRlbnRpdHkiOiJwZXRhciIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjIzMTQ1MjgzLCJleHAiOjE2MjM3NTAwODMsImlzcyI6ImxvY2FsaG9zdCJ9.n55MS99oFYtsFwk_fSRJcpDHSysIqUbAEPQ2D8iF249HZgvF0Ms9wNWedGfKi7W6GGO-9UszdFlwNJ0QbJqVAq91hiMpU36dky1HTRceVNm-apF79soD_ahbimFF34o2drnne5jHJzirFzT61McYDT3AOoK_oENrAD5jkQKvNIfAVlAay-PMVLuA9HMSlAjg_T357LpxFbyq1FYXB8V6rwgqdjuqfoJ_LMETWv8osz4uRtTETkQtvN8oGlH_xTH2W63RVqKRJ8T6Q-2_fcZCi2aRkGEUJ2A8_kWrmymLm5tCgZFfCoJxzLiZgcDAFcaSO7zKVneV8HpW_y2oDmkoog\",\n    \"refreshToken\": null\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API_URL",
+			"value": "http://localhost:40080"
+		},
+		{
+			"key": "API_ADMIN_AUTH_TOKEN",
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWRlbnRpdHkiOiJwZXRhciIsInJvbGUiOiJhZG1pbmlzdHJhdG9yIiwiaWF0IjoxNjIyODA3NDI5LCJleHAiOjE2MjM0MTIyMjksImlzcyI6ImxvY2FsaG9zdCJ9.MFEdn3xpb_rmczgffmKJl2LFPDPPV7qY0OrAQspQqeYjsTkfC0dqsBVo9oUqtntQYvd4FeNs9KBgH0mCSQo6ssisQfu0p6KfRUTymS3iZBoTNfqfJ7qR8R8WArnVpue0UloqIAkSjSwdhgeJuZs8A3GUs9hBxBUsK1vl-XDFCZP8RwB9PPjyuijFmIYthq2u4ohSzTMLeqyA6bnUxQ1xAHK3OzgYW_OnSsEJpT_D7Ep-vRbpS57N00x6c8vt7cYB1iEJE901zwa4cEJlTZyOgMsN4fTIdEfZd6-GWgZOjC_F41QuDG6U786yKjViLcCSjf9n4YP3CWe4Zp7oezUzrA"
+		}
+	]
+}
