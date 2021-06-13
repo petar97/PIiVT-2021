@@ -36,8 +36,6 @@ export default abstract class BaseService<ReturnModel extends IModel> {
                     const rows = result[0];
                     const lista: ReturnModel[] = [];
 
-                    console.log(options);
-
                     if (Array.isArray(rows)) {
                         for (const row of rows) {
                             lista.push(await this.adaptModel(row, options));

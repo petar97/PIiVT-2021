@@ -595,8 +595,6 @@ class PhoneService extends BaseService<PhoneModel> {
             return [];
         }
 
-        console.log(rows);
-
         const items: PhoneModel[] = [];
 
 

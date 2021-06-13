@@ -10,7 +10,6 @@ interface CategoryDashboardAddState {
     categories: CategoryModel[];
 
     name: string;
-    selectedParent: string;
 
     message: string;
 
@@ -26,7 +25,6 @@ export default class CategoryDashboardAdd extends BasePage<{}> {
         this.state = {
             categories: [],
             name: "",
-            selectedParent: "",
             message: "",
             redirectBackToCategories: false,
         }
