@@ -34,8 +34,6 @@ export default class CategoryDashboardList extends BasePage<{}> {
     loadCategories() {
         CategoryService.getTopLevelCategories()
         .then(categories => {
-            console.log("categories", categories);
-            console.log("category features", categories[0].features);
             this.setState({
                 categories: categories,
             });

@@ -1,6 +1,15 @@
 import api from '../api/api';
 import CategoryModel from '../../../03-backend/src/components/category/model';
 
+interface IAddCategory {
+    name: string;
+}
+
+interface IAddCategoryResult {
+    success: boolean;
+    message?: string;
+}
+
 export default class CategoryService {
     public static getTopLevelCategories(): Promise<CategoryModel[]> {
         return new Promise<CategoryModel[]>(resolve => {
@@ -25,6 +34,36 @@ export default class CategoryService {
 
                 resolve(res.data as CategoryModel);
             });
+        });
+    }
+
+    public static addNewCategory(data: IAddCategory): Promise<IAddCategoryResult> {
+        return new Promise<IAddCategoryResult>(resolve => {
+            api("post", "/category", "administrator", data)
+            .then(res => {
+                if (res?.status === "error") {
+                    if (Array.isArray(res?.data?.data)) {
+                        const field = res?.data?.data[0]?.instancePath.replace('/', '');
+                        const msg   = res?.data?.data[0]?.message;
+                        const error = field + " " + msg;
+                        return resolve({
+                            success: false,
+                            message: error,
+                        });
+                    }
+                }
+
+                if (res?.data?.errorCode === 1062) {
+                    return resolve({
+                        success: false,
+                        message: "A category with this name already exists.",
+                    });
+                }
+
+                return resolve({
+                    success: true,
+                });
+            })
         });
     }
 }

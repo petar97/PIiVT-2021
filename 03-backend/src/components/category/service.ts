@@ -27,7 +27,6 @@ class CategoryService extends BaseService<CategoryModel>{
     public async getAll(
         options: Partial<CategoryModelAdapterOptions> = { }
     ): Promise<CategoryModel[]|IErrorResponse> {
-        console.log("options1", options);
         return await this.getAllFromTable("category", options);
     }
 
@@ -35,7 +34,6 @@ class CategoryService extends BaseService<CategoryModel>{
         categoryId: number,
         options: Partial<CategoryModelAdapterOptions> = { }
     ): Promise<CategoryModel|IErrorResponse|null> {
-        console.log("options2", options);
         return await this.getByIdFromTable("category", categoryId, options);
     }
 
