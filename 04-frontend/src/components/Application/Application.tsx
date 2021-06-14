@@ -15,7 +15,8 @@ import PhonePage from '../Phone/PhonePage';
 import CategoryDashboardList from '../Administrator/Dashboard/Category/CategoryDashboardList';
 import CategoryDashboardAdd from '../Administrator/Dashboard/Category/CategoryDashboardAdd';
 import CategoryDashboardEdit from '../Administrator/Dashboard/Category/CategoryDashboardEdit';
-import FeatureDashboardList from '../Administrator/Dashboard/FeatureValue/FeatureDashboardList';
+import FeatureDashboardList from '../Administrator/Dashboard/Feature/FeatureDashboardList';
+import PhoneDashboardAdd from '../Administrator/Dashboard/Phone/PhoneDashboardAdd';
 
 class ApplicationState {
   authorizedRole: "administrator" | "visitor" = "visitor";
@@ -111,6 +112,8 @@ export default class Application extends React.Component {
               <Route exact path="/dashboard/category/add" component={CategoryDashboardAdd} />
               <Route path="/dashboard/category/edit/:cid" component={CategoryDashboardEdit} />
               <Route path="/dashboard/category/features/:cid/list" component={FeatureDashboardList} />
+
+              <Route exact path="/dashboard/phone/new" component={PhoneDashboardAdd} />
             </Switch>
           </div>
 
