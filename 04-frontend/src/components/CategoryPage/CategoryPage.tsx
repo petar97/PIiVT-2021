@@ -38,14 +38,12 @@ export default class CategoryPage extends BasePage<CategoryPageProperties> {
     }
 
     private getCategoryId(): number|null {
-        console.log("getCategoryId:", this.props);
         const cid = this.props.match?.params.cid;
         return cid ? +(cid) : null;
     }
 
     private getCategoryData() {
         const cId = this.getCategoryId();
-        console.log("CID:", cId);
         this.state.categories = [];
         this.state.features = [];
         this.state.phones = [];
@@ -84,7 +82,6 @@ export default class CategoryPage extends BasePage<CategoryPageProperties> {
     private apiGetCategory(cId: number) {
         CategoryService.getCategoryById(cId)
         .then(result => {
-            console.log("apiGetCategory: ", result);
             if (result === null) {
                 return this.setState({
                     title: "Category not found",

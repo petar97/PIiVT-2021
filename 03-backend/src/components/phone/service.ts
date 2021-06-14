@@ -556,20 +556,6 @@ class PhoneService extends BaseService<PhoneModel> {
     }
 
     public async getAllByFeatureId(featureId: number): Promise<PhoneModel[]> {
-        /* return await this.getAllByFieldNameFromTable("article", "category_id", categoryId, {
-            loadPhotos: true,
-        }) as PhoneModel[]; */
-
-        /* SELECT
-                phone_feature.feature_id,
-                phone_feature.value,
-                feature.name
-            FROM
-                phone_feature
-            INNER JOIN feature ON feature.feature_id = phone_feature.feature_id
-            WHERE
-                phone_feature.phone_id = ?;`; */
-
         const sql = `
         SELECT
             phone.phone_id,
@@ -587,7 +573,8 @@ class PhoneService extends BaseService<PhoneModel> {
         INNER JOIN photo ON photo.phone_id = phone_feature.phone_id
         WHERE
             phone_feature.feature_id = ?
-        GROUP BY phone_id;`;
+        GROUP BY phone_id
+        ORDER BY phone.price DESC;`;
 
         const [ rows ] = await this.db.execute(sql, [ featureId ]);
 

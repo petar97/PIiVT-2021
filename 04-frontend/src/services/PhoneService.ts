@@ -39,7 +39,6 @@ export default class PhoneService {
                     }
                     return resolve([]);
                 }
-                console.log("res.data:", res.data);
                 resolve(res.data as PhoneModel[]);
             });
         });

@@ -16,7 +16,6 @@ function getThumbPath(url: string): string {
 }
 
 export default function PhoneItem(props: PhoneItemProperties) {
-    console.log("props.phone:", props.phone);
     return (
         <Col xs={ 12 } sm={ 6 } md={ 4 } lg={ 3 } className="mt-3">
             <Card>

@@ -38,14 +38,12 @@ export default class FeaturePage extends BasePage<FeaturePageProperties> {
     }
 
     private getFeatureId(): number|null {
-        console.log("getFeatureId:", this.props);
         const fid = this.props.match?.params.fid;
         return fid ? +(fid) : null;
     }
 
     private getCategoryData() {
         const fId = this.getFeatureId();
-        console.log("fid:", fId);
         this.state.features = [];
         this.state.phones = [];
 
@@ -83,7 +81,6 @@ export default class FeaturePage extends BasePage<FeaturePageProperties> {
     private apiGetFeature(fId: number) {
         FeatureService.getFeatureById(fId)
         .then(result => {
-            console.log("apiGetFeature: ", result);
             if (result === null) {
                 return this.setState({
                     title: "Feature not found",

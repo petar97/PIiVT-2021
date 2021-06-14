@@ -63,27 +63,12 @@ export default class CategoryDashboardList extends BasePage<{}> {
                     categories.map(category => (
                         <li key={ "category-list-item-" + category.categoryId }>
                             <b>{ category.name }</b> { this.renderCategoryOptions(category) }
-                            {/* { this.renderFeatureGroup(category.features as FeatureModel[]) } */}
                         </li>
                     ))
                 }
             </ul>
         );
     }
-
-    /* private renderFeatureGroup(features: FeatureModel[]): JSX.Element {
-        return (
-            <ul>
-                {
-                    features.map(feature => (
-                        <li key={ "feature-list-item-" + feature.featureId }>
-                            <b>{ feature.name }</b> { this.renderCategoryOptions(feature) }
-                        </li>
-                    ))
-                }
-            </ul>
-        );
-    } */
 
     private renderCategoryOptions(category: CategoryModel|FeatureModel): JSX.Element {
         return (

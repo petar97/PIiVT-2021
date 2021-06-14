@@ -229,10 +229,7 @@ export default class PhoneDashboardAdd extends BasePage<{}> {
         if (selectedCategory.features === undefined) {
             return;
         }
-
-        // For students:
-        // We map only the required ones, in case that the selected category was changed,
-        // and its featre values remained in state
+        
         for (let feature of selectedCategory.features) {
             const value = this.state.featureValues.get(feature.featureId);
 
