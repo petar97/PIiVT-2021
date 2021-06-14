@@ -241,6 +241,10 @@ class PhoneController extends BaseController {
         if (id < 1) return res.status(400).send("Invalid category ID value.");
         res.send(await this.services.phoneService.getAllByFeatureId(id));
     }
+
+    public async getAllPhones(req: Request, res: Response) {
+        res.send(await this.services.phoneService.getAllPhones());
+    }
 }
 
 export default PhoneController;

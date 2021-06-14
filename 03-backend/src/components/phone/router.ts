@@ -40,5 +40,6 @@ export default class PhoneRouter implements IRouter {
         );
         
         application.get("/feature/:id/phone", phoneController.getAllByFeatureId.bind(phoneController));
+        application.get("/phone", phoneController.getAllPhones.bind(phoneController));
     }
 }

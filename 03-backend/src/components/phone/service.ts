@@ -556,7 +556,7 @@ class PhoneService extends BaseService<PhoneModel> {
     }
 
     public async getAllByFeatureId(featureId: number): Promise<PhoneModel[]> {
-        const sql = `
+        const sql: string = `
         SELECT
             phone.phone_id,
             phone.title,
@@ -604,6 +604,47 @@ class PhoneService extends BaseService<PhoneModel> {
                         value: row?.value,
                     }
                 ],
+            });
+        }
+
+        return items;
+    }
+
+    public async getAllPhones(): Promise<PhoneModel[]|IErrorResponse> {
+        const sql: string = `
+        SELECT
+            phone.*,
+            photo.image_path,
+            photo.photo_id
+        FROM
+            phone
+        INNER JOIN photo ON photo.phone_id = phone.phone_id
+        GROUP BY phone_id
+        ORDER BY phone.price DESC;`;
+
+        const [ rows ] = await this.db.execute(sql);
+
+        if (!Array.isArray(rows) || rows.length === 0) {
+            return [];
+        }
+
+        const items: PhoneModel[] = [];
+
+
+        for (const row of rows as any) {
+            items.push({
+                phoneId: +(row?.phone_id),
+                title: row?.title,
+                description: row?.description,
+                createdAt: row?.created_at,
+                price: row?.price,
+                photos: [
+                    {
+                        photoId: row?.photo_id,
+                        imagePath: row?.image_path,
+                    }
+                ],
+                features: [],
             });
         }
 
