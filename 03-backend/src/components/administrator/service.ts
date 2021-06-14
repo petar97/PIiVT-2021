@@ -33,9 +33,6 @@ class AdministratorService extends BaseService<AdministratorModel> {
 
     public async add(data: IAddAdministrator): Promise<AdministratorModel|IErrorResponse> {
         return new Promise<AdministratorModel|IErrorResponse>(async resolve => {
-            // broj karaktera
-            // ! return resolve({ ... });
-
             const passwordHash = bcrypt.hashSync(data.password, 11);
 
             this.db.execute(

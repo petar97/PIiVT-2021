@@ -57,7 +57,6 @@ async function main() {
         featureService: new FeatureService(resources),
         phoneService: new PhoneService(resources),
         administratorService: new AdministratorService(resources),
-        //authService: new AuthService(resources),
     };
 
     application.use(

@@ -12,7 +12,7 @@ export default class TopMenu extends React.Component<TopMenuProperties> {
             return (
                 <Nav className="justify-content-center">
                     <Nav.Item>
-                        <Link className="nav-link" to="/">Home</Link>
+                        <Link className="nav-link" to="/">Phones</Link>
                     </Nav.Item>
 
                     <Nav.Item>
@@ -24,7 +24,7 @@ export default class TopMenu extends React.Component<TopMenuProperties> {
                     </Nav.Item>
 
                     <Nav.Item>
-                        <Link className="nav-link" to="/administrator/login">Admin login</Link>
+                        <Link className="nav-link" to="/administrator/login">Admin Login</Link>
                     </Nav.Item>
                 </Nav>
             );
@@ -34,7 +34,7 @@ export default class TopMenu extends React.Component<TopMenuProperties> {
             return (
                 <Nav className="justify-content-center">
                     <Nav.Item>
-                        <Link className="nav-link" to="/">Home</Link>
+                        <Link className="nav-link" to="/">Phones</Link>
                     </Nav.Item>
 
                     <Nav.Item>
@@ -42,7 +42,7 @@ export default class TopMenu extends React.Component<TopMenuProperties> {
                     </Nav.Item>
 
                     <Nav.Item>
-                        <Link className="nav-link" to="/dashboard/phone/new">Phones</Link>
+                        <Link className="nav-link" to="/dashboard/phone/new">Add New Phone</Link>
                     </Nav.Item>
 
                     <Nav.Item>

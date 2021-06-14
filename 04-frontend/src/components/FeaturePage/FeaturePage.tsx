@@ -66,7 +66,6 @@ export default class FeaturePage extends BasePage<FeaturePageProperties> {
                     title: "No categories found",
                     categories: [],
                     showBackButton: true,
-                    parentCategoryId: null,
                 });
             }
 

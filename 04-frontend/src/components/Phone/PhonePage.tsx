@@ -4,7 +4,6 @@ import BasePage, { BasePageProperties } from '../BasePage/BasePage';
 import { Row, Col, Card } from 'react-bootstrap';
 import * as path from "path";
 import { AppConfiguration } from "../../config/app.config";
-//import "./PhonePage.sass";
 import PhoneModel from '../../../../03-backend/src/components/phone/model';
 
 class PhonePageProperties extends BasePageProperties {
@@ -72,6 +71,83 @@ export default class PhonePage extends BasePage<PhonePageProperties> {
 
         const phone = this.state.data as PhoneModel;
 
+        if (!this.props.match?.params.pid) {
+            return (
+                <>
+                    <h1>
+                        <Link to={ "/phone" }>
+                            &lt; Back
+                        </Link> | { phone.title }
+                    </h1>
+    
+                    <Row>
+                        <Col xs={ 12 } md={ 8 }>
+                            <Card className="mb-3">
+                                <Row>
+                                    {
+                                        phone.photos.map(photo => (
+                                            <Col key={ "phone-photo-" + photo.photoId }
+                                                 xs={12} sm={6} md={4} lg={3}>
+                                                <Card.Img variant="top"
+                                                    src={ this.getThumbPath(AppConfiguration.API_URL + "/" + photo.imagePath) } />
+                                            </Col>
+                                        ))
+                                    }
+                                </Row>
+    
+                                <Card.Body>
+                                    <Card.Text as="div">
+                                        <Row>
+                                            <Col>
+                                                <b className="h1">
+                                                    &euro; { phone.price.toFixed(2) }
+                                                </b>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                { phone.description }
+                                            </Col>
+                                        </Row>
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+    
+                        <Col xs={ 12 } md={ 4 }>
+                            <Card>
+                                <Card.Body>
+                                    <Card.Title>
+                                        <b>Features</b>
+                                    </Card.Title>
+                                    <Card.Text as="div">
+                                        <table className="table table-hover table-sm">
+                                            <tr>
+                                                <th>Feature</th>
+                                                <th>Value</th>
+                                            </tr>
+                                            {
+                                                phone.features.map(f => (
+                                                    <tr key={ "table-phone-feature-value-" + f.featureId }>
+                                                        <th>
+                                                            { f.name }
+                                                        </th>
+                                                        <td>
+                                                            { f.value }
+                                                        </td>
+                                                    </tr>
+                                                ))
+                                            }
+                                        </table>
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                </>
+            );
+        }
+
         return (
             <>
                 <h1>
@@ -127,13 +203,13 @@ export default class PhonePage extends BasePage<PhonePageProperties> {
                                             <th>Value</th>
                                         </tr>
                                         {
-                                            phone.features.map(af => (
-                                                <tr key={ "table-phone-feature-value-" + af.featureId }>
+                                            phone.features.map(f => (
+                                                <tr key={ "table-phone-feature-value-" + f.featureId }>
                                                     <th>
-                                                        { af.name }
+                                                        { f.name }
                                                     </th>
                                                     <td>
-                                                        { af.value }
+                                                        { f.value }
                                                     </td>
                                                 </tr>
                                             ))
