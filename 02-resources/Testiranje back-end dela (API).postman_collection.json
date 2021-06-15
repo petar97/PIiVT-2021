@@ -1416,13 +1416,18 @@
 							"formdata": [
 								{
 									"key": "data",
-									"value": "{\n\t\"title\": \"iPhone Xs\",\n\t\"description\": \"Opis za iPhone Xs...\",\n\t\"price\": 600.33,\n\t\"features\": [{\n\t\t\t\"featureId\": 2,\n\t\t\t\"value\": \"12\"\n\t\t},\n\t\t{\n\t\t\t\"featureId\": 6,\n\t\t\t\"value\": \"4.5G\"\n\t\t},\n\t\t{\n\t\t\t\"featureId\": 9,\n\t\t\t\"value\": \"4GB\"\n\t\t},\n\t\t{\n\t\t\t\"featureId\": 11,\n\t\t\t\"value\": \"5.9\\\"\"\n\t\t},\n\t\t{\n\t\t\t\"featureId\": 14,\n\t\t\t\"value\": \"64GB\"\n\t\t}\n\t]\n}\n",
+									"value": "{\n\t\"title\": \"Windows Phone X\",\n\t\"description\": \"Opis za Windows Phone X: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel dignissim enim. In iaculis nulla commodo bibendum laoreet. Praesent vulputate lorem fringilla porttitor scelerisque. Etiam sit amet neque quis sem egestas tincidunt nec ut arcu. Praesent ornare rutrum ex ut pharetra. Integer fermentum libero nec massa gravida porta. Curabitur sed venenatis risus. Suspendisse aliquet vitae ligula vitae dignissim. Quisque placerat orci libero, quis porttitor erat sodales sit amet. Nulla ornare nisl dolor, id dignissim lorem viverra sit amet.\",\n\t\"price\": 450.81,\n\t\"features\": [{\n\t\t\t\"featureId\": 3,\n\t\t\t\"value\": \"10\"\n\t\t},\n\t\t{\n\t\t\t\"featureId\": 5,\n\t\t\t\"value\": \"Standard LTE\"\n\t\t},\n\t\t{\n\t\t\t\"featureId\": 8,\n\t\t\t\"value\": \"1.5GB\"\n\t\t},\n\t\t{\n\t\t\t\"featureId\": 11,\n\t\t\t\"value\": \"5.6\\\"\"\n\t\t},\n\t\t{\n\t\t\t\"featureId\": 16,\n\t\t\t\"value\": \"512GB\"\n\t\t}\n\t]\n}\n",
 									"type": "text"
 								},
 								{
 									"key": "photo1",
 									"type": "file",
-									"src": "/C:/Users/Legenda/Pictures/Saved Pictures/New folder/GY8Rg8f.png"
+									"src": "/C:/Users/Legenda/Pictures/6f050e39-windows_10_logoblue.svg-copy_windows.jpg"
+								},
+								{
+									"key": "photo2",
+									"type": "file",
+									"src": "/C:/Users/Legenda/Pictures/windows-phone-the-final-review.jpg"
 								}
 							]
 						},
@@ -1515,7 +1520,7 @@
 					]
 				},
 				{
-					"name": "PUT to edit an existing article",
+					"name": "PUT to edit an existing phone",
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -1541,7 +1546,7 @@
 					},
 					"response": [
 						{
-							"name": "PUT to edit an existing article",
+							"name": "PUT to edit an existing phone",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [],
@@ -1606,7 +1611,7 @@
 							"body": "{\n    \"categories\": [\n        {\n            \"categoryId\": 1,\n            \"name\": \"Operativni sistem\"\n        },\n        {\n            \"categoryId\": 2,\n            \"name\": \"RAM\"\n        },\n        {\n            \"categoryId\": 3,\n            \"name\": \"Storage\"\n        }\n    ],\n    \"photos\": [\n        {\n            \"photoId\": 1,\n            \"imagePath\": \"static/uploads/2021/05/1.jpg\"\n        },\n        {\n            \"photoId\": 2,\n            \"imagePath\": \"static/uploads/2021/05/1-all.jpg\"\n        }\n    ],\n    \"features\": [\n        {\n            \"featureId\": 2,\n            \"name\": \"iOS\",\n            \"value\": \"14\"\n        },\n        {\n            \"featureId\": 4,\n            \"name\": \"3G\",\n            \"value\": \"3.0G\"\n        },\n        {\n            \"featureId\": 9,\n            \"name\": \"2-6GB\",\n            \"value\": \"4GB\"\n        },\n        {\n            \"featureId\": 12,\n            \"name\": \"6-6.5''\",\n            \"value\": \"6.1\\\"\"\n        },\n        {\n            \"featureId\": 14,\n            \"name\": \"<128GB\",\n            \"value\": \"64GB\"\n        }\n    ],\n    \"phoneId\": 1,\n    \"title\": \"iPhone 12\",\n    \"description\": \"Opis za iPhone 12...\",\n    \"createdAt\": \"2021-06-01T15:11:07.000Z\",\n    \"price\": 800.49\n}"
 						},
 						{
-							"name": "PUT to edit an existing article - with an invalid ID",
+							"name": "PUT to edit an existing phone- with an invalid ID",
 							"originalRequest": {
 								"method": "PUT",
 								"header": [],
@@ -1673,24 +1678,24 @@
 					]
 				},
 				{
-					"name": "DELETE an existing article",
+					"name": "DELETE an existing phone",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{API_URL}}/phone/46",
+							"raw": "{{API_URL}}/phone/48",
 							"host": [
 								"{{API_URL}}"
 							],
 							"path": [
 								"phone",
-								"46"
+								"48"
 							]
 						}
 					},
 					"response": [
 						{
-							"name": "DELETE an existing article",
+							"name": "DELETE an existing phone",
 							"originalRequest": {
 								"method": "DELETE",
 								"header": [],
@@ -1746,7 +1751,7 @@
 							"body": "{\n    \"errorCode\": 0,\n    \"errorMessage\": \"Phone deleted!\"\n}"
 						},
 						{
-							"name": "DELETE an existing article - with an invalid ID",
+							"name": "DELETE an existing phone - with an invalid ID",
 							"originalRequest": {
 								"method": "DELETE",
 								"header": [],
@@ -1941,7 +1946,7 @@
 					]
 				},
 				{
-					"name": "POST new photos to an article",
+					"name": "POST new photos to a phone",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -1951,30 +1956,30 @@
 								{
 									"key": "photo1",
 									"type": "file",
-									"src": "/C:/Users/Legenda/Pictures/Saved Pictures/New folder/GY8Rg8f.png"
+									"src": "/C:/Users/Legenda/Pictures/Screenshot_2019-06-15_at_3.28.03_AM_hij9sw.png"
 								},
 								{
 									"key": "photo2",
 									"type": "file",
-									"src": "/C:/Users/Legenda/Pictures/Saved Pictures/Walls II/wallhaven-429p9n_1920x1080.png"
+									"src": "/C:/Users/Legenda/Pictures/samsung-smartphones-1618864389.jpg"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{API_URL}}/phone/47/photo",
+							"raw": "{{API_URL}}/phone/44/photo",
 							"host": [
 								"{{API_URL}}"
 							],
 							"path": [
 								"phone",
-								"47",
+								"44",
 								"photo"
 							]
 						}
 					},
 					"response": [
 						{
-							"name": "POST new photos to an article",
+							"name": "POST new photos to a phone",
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
@@ -2046,7 +2051,7 @@
 							"body": "{\n    \"categories\": [],\n    \"photos\": [\n        {\n            \"photoId\": 54,\n            \"imagePath\": \"static/uploads/2021/06/d1fda9a7-9b45-45b7-afd6-9e1ca6ab29cc-GY8Rg8f.png\"\n        },\n        {\n            \"photoId\": 55,\n            \"imagePath\": \"static/uploads/2021/06/0ea71f25-b73a-465e-90b8-20b088ef3f1a-wallhaven-429p9n_1920x1080.png\"\n        }\n    ],\n    \"features\": [\n        {\n            \"featureId\": 2,\n            \"name\": \"iOS\",\n            \"value\": \"12\"\n        },\n        {\n            \"featureId\": 6,\n            \"name\": \"4G\",\n            \"value\": \"4.5G\"\n        },\n        {\n            \"featureId\": 9,\n            \"name\": \"2-6GB\",\n            \"value\": \"4GB\"\n        },\n        {\n            \"featureId\": 11,\n            \"name\": \"<6''\",\n            \"value\": \"5.9\\\"\"\n        },\n        {\n            \"featureId\": 14,\n            \"name\": \"<128GB\",\n            \"value\": \"64GB\"\n        }\n    ],\n    \"phoneId\": 47,\n    \"title\": \"iPhone Xs\",\n    \"description\": \"Opis za iPhone Xs...\",\n    \"createdAt\": \"2021-06-03T13:55:44.000Z\",\n    \"price\": 600.33\n}"
 						},
 						{
-							"name": "POST new photos to an article - with an invalid ID",
+							"name": "POST new photos to a phone- with an invalid ID",
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
@@ -2120,7 +2125,7 @@
 					]
 				},
 				{
-					"name": "GET all articles by feature",
+					"name": "GET all phones by feature",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -2258,6 +2263,83 @@
 							],
 							"cookie": [],
 							"body": "[]"
+						}
+					]
+				},
+				{
+					"name": "GET all phones",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_URL}}/phone",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"phone"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET all phones",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{API_URL}}/phone",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"phone"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:8000"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "5140"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1414-O9a+Hq1vLKQU5cp4nE10cCGYEq4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 14 Jun 2021 19:58:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"phoneId\": 40,\n        \"title\": \"Samsung Galaxy S21\",\n        \"description\": \"Opis za Samsung Galaxy S21: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel dignissim enim. In iaculis nulla commodo bibendum laoreet. Praesent vulputate lorem fringilla porttitor scelerisque. Etiam sit amet neque quis sem egestas tincidunt nec ut arcu. Praesent ornare rutrum ex ut pharetra. Integer fermentum libero nec massa gravida porta. Curabitur sed venenatis risus. Suspendisse aliquet vitae ligula vitae dignissim. Quisque placerat orci libero, quis porttitor erat sodales sit amet. Nulla ornare nisl dolor, id dignissim lorem viverra sit amet.\",\n        \"createdAt\": \"2021-06-02T13:30:20.000Z\",\n        \"price\": \"999.35\",\n        \"photos\": [\n            {\n                \"photoId\": 48,\n                \"imagePath\": \"static/uploads/2021/06/41df59a9-e6a3-4772-92d1-008842dcf925-ronan-furuta-ZJ8M0bfiu8U-unsplash.jpg\"\n            }\n        ],\n        \"features\": []\n    },\n    {\n        \"phoneId\": 48,\n        \"title\": \"Test title\",\n        \"description\": \"Neki opis za test...\",\n        \"createdAt\": \"2021-06-14T13:43:18.000Z\",\n        \"price\": \"999.24\",\n        \"photos\": [\n            {\n                \"photoId\": 56,\n                \"imagePath\": \"static/uploads/2021/06/f60b4a1e-3676-415f-b771-3fcd8d363a7e-wallhaven-54lqq0_1920x1080.png\"\n            }\n        ],\n        \"features\": []\n    },\n    {\n        \"phoneId\": 1,\n        \"title\": \"iPhone 12\",\n        \"description\": \"Opis za iPhone 12: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel dignissim enim. In iaculis nulla commodo bibendum laoreet. Praesent vulputate lorem fringilla porttitor scelerisque. Etiam sit amet neque quis sem egestas tincidunt nec ut arcu. Praesent ornare rutrum ex ut pharetra. Integer fermentum libero nec massa gravida porta. Curabitur sed venenatis risus. Suspendisse aliquet vitae ligula vitae dignissim. Quisque placerat orci libero, quis porttitor erat sodales sit amet. Nulla ornare nisl dolor, id dignissim lorem viverra sit amet.\",\n        \"createdAt\": \"2021-06-01T15:11:07.000Z\",\n        \"price\": \"800.49\",\n        \"photos\": [\n            {\n                \"photoId\": 1,\n                \"imagePath\": \"static/uploads/2021/05/1.jpg\"\n            }\n        ],\n        \"features\": []\n    },\n    {\n        \"phoneId\": 42,\n        \"title\": \"Samsung Galaxy S20\",\n        \"description\": \"Opis za Samsung Galaxy S20: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel dignissim enim. In iaculis nulla commodo bibendum laoreet. Praesent vulputate lorem fringilla porttitor scelerisque. Etiam sit amet neque quis sem egestas tincidunt nec ut arcu. Praesent ornare rutrum ex ut pharetra. Integer fermentum libero nec massa gravida porta. Curabitur sed venenatis risus. Suspendisse aliquet vitae ligula vitae dignissim. Quisque placerat orci libero, quis porttitor erat sodales sit amet. Nulla ornare nisl dolor, id dignissim lorem viverra sit amet.\",\n        \"createdAt\": \"2021-06-02T13:36:08.000Z\",\n        \"price\": \"799.97\",\n        \"photos\": [\n            {\n                \"photoId\": 49,\n                \"imagePath\": \"static/uploads/2021/06/54fad404-3764-4791-afdb-212972f2e6ab-ronan-furuta-ZJ8M0bfiu8U-unsplash.jpg\"\n            }\n        ],\n        \"features\": []\n    },\n    {\n        \"phoneId\": 47,\n        \"title\": \"iPhone Xs\",\n        \"description\": \"Opis za iPhone Xs: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel dignissim enim. In iaculis nulla commodo bibendum laoreet. Praesent vulputate lorem fringilla porttitor scelerisque. Etiam sit amet neque quis sem egestas tincidunt nec ut arcu. Praesent ornare rutrum ex ut pharetra. Integer fermentum libero nec massa gravida porta. Curabitur sed venenatis risus. Suspendisse aliquet vitae ligula vitae dignissim. Quisque placerat orci libero, quis porttitor erat sodales sit amet. Nulla ornare nisl dolor, id dignissim lorem viverra sit amet.\",\n        \"createdAt\": \"2021-06-03T13:55:44.000Z\",\n        \"price\": \"600.33\",\n        \"photos\": [\n            {\n                \"photoId\": 54,\n                \"imagePath\": \"static/uploads/2021/06/d1fda9a7-9b45-45b7-afd6-9e1ca6ab29cc-GY8Rg8f.png\"\n            }\n        ],\n        \"features\": []\n    },\n    {\n        \"phoneId\": 45,\n        \"title\": \"iPhone X\",\n        \"description\": \"Opis za iPhone X: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel dignissim enim. In iaculis nulla commodo bibendum laoreet. Praesent vulputate lorem fringilla porttitor scelerisque. Etiam sit amet neque quis sem egestas tincidunt nec ut arcu. Praesent ornare rutrum ex ut pharetra. Integer fermentum libero nec massa gravida porta. Curabitur sed venenatis risus. Suspendisse aliquet vitae ligula vitae dignissim. Quisque placerat orci libero, quis porttitor erat sodales sit amet. Nulla ornare nisl dolor, id dignissim lorem viverra sit amet.\",\n        \"createdAt\": \"2021-06-02T14:39:09.000Z\",\n        \"price\": \"550.99\",\n        \"photos\": [\n            {\n                \"photoId\": 51,\n                \"imagePath\": \"static/uploads/2021/06/8eb5190e-9fab-47df-898c-35ee97909876-GY8Rg8f.png\"\n            }\n        ],\n        \"features\": []\n    },\n    {\n        \"phoneId\": 44,\n        \"title\": \"Samsung Galaxy S8\",\n        \"description\": \"Opis za Samsung Galaxy S8: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel dignissim enim. In iaculis nulla commodo bibendum laoreet. Praesent vulputate lorem fringilla porttitor scelerisque. Etiam sit amet neque quis sem egestas tincidunt nec ut arcu. Praesent ornare rutrum ex ut pharetra. Integer fermentum libero nec massa gravida porta. Curabitur sed venenatis risus. Suspendisse aliquet vitae ligula vitae dignissim. Quisque placerat orci libero, quis porttitor erat sodales sit amet. Nulla ornare nisl dolor, id dignissim lorem viverra sit amet.\",\n        \"createdAt\": \"2021-06-02T13:40:58.000Z\",\n        \"price\": \"325.25\",\n        \"photos\": [\n            {\n                \"photoId\": 50,\n                \"imagePath\": \"static/uploads/2021/06/b023d0d3-04f6-4022-8384-4e64f55c7fe8-ronan-furuta-ZJ8M0bfiu8U-unsplash.jpg\"\n            }\n        ],\n        \"features\": []\n    }\n]"
 						}
 					]
 				}
