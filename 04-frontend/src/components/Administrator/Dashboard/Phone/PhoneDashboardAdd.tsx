@@ -161,6 +161,14 @@ export default class PhoneDashboardAdd extends BasePage<{}> {
                                             </Form.Control>
                                         </Form.Group>
 
+                                        {/* <Form.Group>
+                                            <Form.Label>Features:</Form.Label>
+                                            <Form.Control as="select"
+                                                value={ this.state.featureValues.get(this.state.feature.featureId) ?? "" }
+                                                onChange={ this.onChangeFeatureValue(feature.featureId) } >
+                                            </Form.Control>
+                                        </Form.Group> */}
+
                                         <p className="mt-3 h4">Features:</p>
                                         { selectedCategory.features.map(f => this.renderFeatureInput(f)) }
 
@@ -197,14 +205,12 @@ export default class PhoneDashboardAdd extends BasePage<{}> {
         );
     }
 
-    private createSelectOptionGroup(category: CategoryModel, level: number = 0): JSX.Element {
-        const levelPrefix = "» ".repeat(level);
+    private createSelectOptionGroup(category: CategoryModel): JSX.Element {
         return (
-            <Fragment key={ "category-and-subcategory-fragment-" + category.categoryId }>
-                <option key={ "parent-category-option-" + category.categoryId } value={ category.categoryId }>
-                    { levelPrefix }{ category.name }
+            <Fragment key={ "category-fragment-" + category.categoryId }>
+                <option key={ "category-option-" + category.categoryId } value={ category.categoryId }>
+                    { category.name }
                 </option>
-                {/* { category.subcategories.map(subcategory => this.createSelectOptionGroup(subcategory, level + 1)) } */}
             </Fragment>
         );
     }
